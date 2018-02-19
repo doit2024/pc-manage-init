@@ -1,0 +1,54 @@
+{
+  "_from": "pc-manage-init@1.0.1",
+  "_id": "pc-manage-init@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-Gv5mt0zL5e0vsxNR1fdtnPj+I8oxYMbtot5SOzqxghK05N4VUpsp2sC6uIgtLh0fvCxf2nrTzCSsJNlCwLJJiw==",
+  "_location": "/pc-manage-init",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "pc-manage-init@1.0.1",
+    "name": "pc-manage-init",
+    "escapedName": "pc-manage-init",
+    "rawSpec": "1.0.1",
+    "saveSpec": null,
+    "fetchSpec": "1.0.1"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/pc-manage-init/-/pc-manage-init-1.0.1.tgz",
+  "_shasum": "6f2e496678f21dbcc13fbe47f40ac31a4389a3b8",
+  "_spec": "pc-manage-init@1.0.1",
+  "_where": "/Users/dengweimin/Desktop/test",
+  "author": {
+    "name": "nudazhuang"
+  },
+  "bin": {
+    "pc-manage-init": "./bin/pc_init.js"
+  },
+  "bugs": {
+    "url": "https://github.com/niuDazhuang/pc_manage_init/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "manage system structure auto init..",
+  "homepage": "https://github.com/niuDazhuang/pc_manage_init#readme",
+  "keywords": [
+    "pc",
+    "manage",
+    "vue",
+    "router",
+    "iview"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "pc-manage-init",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niuDazhuang/pc_manage_init.git"
+  },
+  "version": "1.0.2"
+}
