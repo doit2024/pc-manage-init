@@ -48,7 +48,7 @@
   "name": "pc-manage-init",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niuDazhuang/pc_manage_init.git"
+    "url": "git+https://github.com/niuDazhuang/pc-manage-init.git"
   },
   "version": "1.0.2"
 }
