@@ -5,7 +5,7 @@
 >npm i -S iview
 
 ## 使用
->1. package.json->scripts : "pc-init": "pc-manage-init"
+>1. package.json->scripts : "init": "pc-manage-init"
 >2. npm run pc-init 安装全部
 
 ## 后期计划
