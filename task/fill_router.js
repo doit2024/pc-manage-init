@@ -28,6 +28,6 @@ export default new Router({
 
 module.exports = dir => {
   fs.writeFile(path.join(dir, 'index.js'), content, err => {
-    Tool.dieif(err)
+    Tool.dieif(err, __filename, __line)
   })
 }

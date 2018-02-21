@@ -1,0 +1,72 @@
+
+body,
+div,span,
+header,footer,
+nav,section,aside,article,
+ul,li,
+a,p,i,b,
+h1,h2,h3,h4,h5,h6,
+button,input,select,textarea,
+figure,
+figcaption {
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  text-decoration: none;
+  border: none;
+  font-family: 'Microsoft YaHei';
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,body {
+  // font-size: 12px;
+  color: #485B6D;
+  height: 100%;
+  width: 100%;
+  background-color: #FCFDFF;
+}
+
+input,textarea {
+  outline: none;
+  -webkit-appearance: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+a,i,label,.pointer {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+/* placeholder */
+$color-placeholder: #bbb;
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: $color-placeholder;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: $color-placeholder;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: $color-placeholder;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: $color-placeholder;
+}
+
+/*清除ie10+文本框的叉叉和密码输入框的眼睛图标*/
+
+::-ms-clear,
+::-ms-reveal {
+  display: none;
+}

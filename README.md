@@ -1,8 +1,8 @@
 # 编写中....
 
 ## 项目依赖
->vue-cli router vuex
->npm i -S iview
+>vue-cli vue-router
+>npm i -S iview babel-polyfill vuex
 
 ## 使用
 >1. package.json->scripts : "init": "pc-manage-init"

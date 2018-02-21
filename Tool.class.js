@@ -38,11 +38,7 @@ module.exports = class Tool {
   }
   // 从项目根目录下找文件
   static find (filename) {
-    return CFG['root_dir'] + filename
-  }
-  // 源码文件夹
-  static src (dirname) {
-    return CFG['src'] + dirname
+    return path.join(CFG['root_dir'], filename)
   }
   // 获取配置信息
   static getConfig () {
@@ -62,28 +58,25 @@ module.exports = class Tool {
   }
   // 判断不存在则创建目录
   static createDir (dirname, callback) {
-    const dir = this.src(dirname)
+    const dir = this.find(path.join('src', dirname))
     fs.exists(dir, exist => {
       if (!exist) {
-        this.success(`创建 ${dirname} 目录！`)
         fs.mkdir(dir, err => {
           this.dieif(err, __filename, __line)
           callback(dir)
-          this.success(`创建 ${dirname} 成功！`)
+          this.success(`写入${dirname}成功！`)
         })
       }
     })
   }
-  // 任务
-  static task (type, dir) {
-    if (type === 'fill') {
-      this.createDir(dir, dirname => {
-        Tool.success(`填充 ${dir} 开始!`)
-        require(`./task/${type}_${dir}`)(dirname)
-      })
-    }
+  // fill 任务
+  static taskFill (list) {
+    if (!Array.isArray(list)) throw Error('参数必须数组！')
+    list.forEach(dir => Tool.createDir(dir, dirname => {
+      require(`./task/fill_${dir}`)(dirname)
+    }))
   }
-  // 复制目录
+  // 复制 from 下所有文件(夹)到 to
   static copyDir (from, to) {
     fs.readdir(from, (err, children) => {
       this.dieif(err, __filename, __line)
@@ -97,19 +90,42 @@ module.exports = class Tool {
             let writable = fs.createWriteStream(childTo)
             readable.pipe(writable)
           } else {
-            fs.mkdir(childTo, err => {
-              this.dieif(err, __filename, __line)
-              this.copyDir(childFrom, childTo)
+            fs.exists(childTo, exist => {
+              if (exist) return
+              fs.mkdir(childTo, err => {
+                this.dieif(err, __filename, __line)
+                this.copyDir(childFrom, childTo)
+              })
             })
           }
         })
       })
     })
   }
-  // 复制文件
+  // 复制文件 from 到 to
   static copyFile (from, to) {
     let readable = fs.createReadStream(from)
     let writable = fs.createWriteStream(to)
     readable.pipe(writable)
+  }
+  // 若target存在, 将list添加到target中
+  static addTo (target, list) {
+    if (!Array.isArray(list)) list = [list]
+    fs.exists(target, exist => {
+      if (exist) {
+        fs.readFile(target, (err, res) => {
+          Tool.dieif(err)
+          let data = res.toString()
+          list.forEach((str, index) => {
+            if (!data.includes(str)) {
+              fs.appendFile(target, `${index?'':'\n'}${str}\n`, err => {
+                Tool.dieif(err)
+                Tool.success(`add ${str} to ${path.basename(target)}!`)
+              })
+            }
+          })
+        })
+      }
+    })
   }
 }
