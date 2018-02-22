@@ -7,7 +7,7 @@ module.exports = {
   // 同服务器下多客户端则为 ACCESS_TOKEN 赋不同值，防止串数据
   ACCESS_TOKEN: "DT_ACCESS_TOKEN",
 
-  // 路由表
+  // 路由表: 键或值不能重名
   ROUTES: {
     // login: ['signup', 'signup', 'forget'],
     login: ['signup'],
@@ -60,7 +60,7 @@ module.exports = {
   },
 
   // 左侧菜单栏, 与 ROUTE.home 对应
-  MENU: [
+  SIDER: [
     '首页',
     ['用户', '用户详情', '活跃用户'],
     ['设备', '设备详情', '设备授权'],

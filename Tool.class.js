@@ -76,7 +76,7 @@ module.exports = class Tool {
       require(`./task/fill_${dir}`)(dirname)
     }))
   }
-  // 复制 from 下所有文件(夹)到 to
+  // 复制 from 下所有文件(夹)到 to, 不覆盖
   static copyDir (from, to) {
     fs.readdir(from, (err, children) => {
       this.dieif(err, __filename, __line)
@@ -86,9 +86,10 @@ module.exports = class Tool {
         fs.stat(childFrom, (err, stat) => {
           this.dieif(err, __filename, __line)
           if (stat.isFile()) {
-            let readable = fs.createReadStream(childFrom)
-            let writable = fs.createWriteStream(childTo)
-            readable.pipe(writable)
+            fs.exists(childTo, exist => {
+              if (exist) return
+              this.copyFile(childFrom, childTo)
+            })
           } else {
             fs.exists(childTo, exist => {
               if (exist) return

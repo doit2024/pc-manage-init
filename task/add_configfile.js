@@ -2,7 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const { config_file } = require('../config')
 const Tool = require('../Tool.class')
-const from = path.join(__dirname, '../lib', config_file)
+
+const from = path.join(__dirname, '../config', config_file)
 const to = Tool.find(config_file)
 
 module.exports = cb => {

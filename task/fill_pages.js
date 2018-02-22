@@ -5,15 +5,12 @@ const { ROUTES, TABLE_PAGES } = Tool.getConfig()
 
 module.exports = dir => {
   Object.keys(ROUTES).forEach(first => {
-    // 创建一级目录
+    // 创建一级目录 (login|home|...])
     let groupFirst = path.join(dir, first)
     fs.mkdir(groupFirst, err => {
       Tool.dieif(err)
-      fs.readFile(path.join(__dirname, '../lib/page/router-view.tpl'), (err, res) => {
-        Tool.dieif(err, __filename, __line)
-        let tpl = res.toString()
-        fs.writeFile(path.join(groupFirst, 'index.vue'), tpl, err => Tool.dieif(err))
-      })
+      // 填充 {first}/*.vue
+      Tool.copyDir(path.join(__dirname, '../lib', first), groupFirst)
       ROUTES[first].forEach((second, index) => {
         // 创建二级目录
         let groupSecond = path.join(groupFirst, `${index}_${second[0]}`)
