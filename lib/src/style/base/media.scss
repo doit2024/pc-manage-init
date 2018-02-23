@@ -1,0 +1,21 @@
+$animate-curve: cubic-bezier(0.4, 0, 0, 1);
+@media screen and (max-width: 1200px) {
+  #sider {
+    transition: all .4s $animate-curve;
+    left: -$sidebar-width;
+    &:hover { left: 0; }
+    &.show { left: 0; }
+  }
+  .main { transition: padding-left .4s $animate-curve; }
+}
+
+@media screen and (min-width: 1200px) {
+  #sider {
+    transition: all 0.4s $animate-curve;
+    left: 0;
+  }
+  .main {
+    transition: padding-left .4s $animate-curve;
+    padding-left: $sidebar-width;
+  }
+}

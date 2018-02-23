@@ -5,8 +5,12 @@
 >npm i -S iview babel-polyfill vuex
 
 ## 使用
->1. package.json->scripts : "init": "pc-manage-init"
->2. npm run pc-init 安装全部
+>1. package.json->scripts + (注意加密系统， 改名添加再改回来)
+"ua": "update-api",
+"uc": "update-components",
+"init": "pc-manage-init",
+>2. npm run init
+
 
 ## .......
 

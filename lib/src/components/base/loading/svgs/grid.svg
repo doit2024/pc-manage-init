@@ -1,0 +1,32 @@
+<svg width="105" height="105" viewBox="0 0 105 105" xmlns="http://www.w3.org/2000/svg" fill="#FDAE06">
+    <circle cx="10" cy="55" r="8" fill-opacity=".5">
+        <animate attributeName="fill-opacity"
+         begin="100ms" dur="1s"
+         values="1;.2;1" calcMode="linear"
+         repeatCount="indefinite" />
+    </circle>
+    <circle cx="30" cy="55" r="8">
+        <animate attributeName="fill-opacity"
+         begin="300ms" dur="1s"
+         values="1;.2;1" calcMode="linear"
+         repeatCount="indefinite" />
+    </circle>
+    <circle cx="50" cy="55" r="8">
+        <animate attributeName="fill-opacity"
+         begin="500ms" dur="1s"
+         values="1;.2;1" calcMode="linear"
+         repeatCount="indefinite" />
+    </circle>
+    <circle cx="70" cy="55" r="8">
+        <animate attributeName="fill-opacity"
+         begin="700ms" dur="1s"
+         values="1;.2;1" calcMode="linear"
+         repeatCount="indefinite" />
+    </circle>
+    <circle cx="90" cy="55" r="8">
+        <animate attributeName="fill-opacity"
+         begin="900ms" dur="1s"
+         values="1;.2;1" calcMode="linear"
+         repeatCount="indefinite" />
+    </circle>
+</svg>

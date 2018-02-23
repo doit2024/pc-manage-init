@@ -1,39 +1,59 @@
 @import './var';
 
 .mt {
-  &-10{  margin-top: 10px  }
-  &-20{  margin-top: 20px  }
-  &-30{  margin-top: 30px  }
-  &-40{  margin-top: 40px  }
-  &-60{  margin-top: 60px  }
+	&-10{  margin-top: 10px  }
+	&-20{  margin-top: 20px  }
+	&-30{  margin-top: 30px  }
+	&-40{  margin-top: 40px  }
+	&-60{  margin-top: 60px  }
 }
 .mr {
-  &-6{  margin-right: 6px;  }
-  &-10{  margin-right: 10px;  }
-  &-16{  margin-right: 16px;  }
-  &-20{  margin-right: 20px;  }
-  &-30{  margin-right: 30px;  }
-  &-40{  margin-right: 40px;  }
+	&-6{  margin-right: 6px;  }
+	&-10{  margin-right: 10px;  }
+	&-16{  margin-right: 16px;  }
+	&-20{  margin-right: 20px;  }
+	&-30{  margin-right: 30px;  }
+	&-40{  margin-right: 40px;  }
 }
 .mb {
-  &-20{  margin-bottom: 20px  }
+	&-20{  margin-bottom: 20px  }
 }
 .ml {
-  &-10{  margin-left: 10px  }
-  &-20{  margin-left: 20px  }
+	&-6{  margin-left: 6px  }
+	&-10{  margin-left: 10px  }
+	&-20{  margin-left: 20px  }
+	&-30{  margin-left: 30px  }
+}
+.pr {
+	&-10{ padding-right: 10px }
 }
 .f {
-  &-14 { font-size: 14px; }
-  &-16 { font-size: 16px; }
-  &-primary { color: $color-theme }
-  &-danger { color: $color-danger }
-  &-info { color: $color-info }
-  &-gray { color: $color-gray }
+	&-14 { font-size: 14px; }
+	&-15 { font-size: 15px; }
+	&-16 { font-size: 16px; }
+	&-17 { font-size: 17px; }
+	&-18 { font-size: 18px; }
+	&-primary { color: $color-theme }
+	&-danger { color: $color-danger }
+	&-error { color: $color-danger }
+	&-info { color: $color-info }
+	&-gray { color: $color-gray }
+}
+.height {
+	&-100 {
+		height: 100px;
+	}
 }
 
 .flex {
   display: flex;
   align-items: center;
+}
+
+.flex-center {
+  display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .flex-bottom {
@@ -50,8 +70,8 @@
   word-break: break-all;
 }
 
-.tc { text-align: center }
-.tl { text-align: left }
+.tc { text-align: center; justify-content: center }
+.tl { text-align: left } 
 .tr { text-align: right }
 
 .is_bgimg {
