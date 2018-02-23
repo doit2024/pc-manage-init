@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
 const CFG = require('./config')
 
 Object.defineProperty(global, '__stack', {
@@ -30,11 +31,11 @@ module.exports = class Tool {
   }
   // 控制台任务进度打印
   static success (info) {
-    console.log(`<=============== ${info} ===============>\n`)
+    console.log(chalk.green(`<=============== ${info} ===============>\n`))
   }
   // 错误提示打印
   static error (info) {
-    console.log(`<！！！！！！！！！！ ${info} ！！！！！！！！！！>\n`)
+    console.log(chalk.red(`<！！！！！！！！！！ ${info} ！！！！！！！！！！>\n`))
   }
   // 从项目根目录下找文件
   static find (filename) {

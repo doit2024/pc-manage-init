@@ -22,7 +22,7 @@ module.exports = () => {
     .replace(/(assetsPublicPath: ')/, '$1.')
     fs.writeFile(target, data, err => {
       Tool.dieif(err, __filename, __line)
-      Tool.success('代理设置完成！')
+      Tool.success('本地代理设置完成！')
     })
   })
 }
