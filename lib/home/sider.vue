@@ -2,74 +2,79 @@
   <Sider id="sider" v-scrollbar :class="{show: isShowSider}">
     <Menu
       style="width: 200px;"
-      :open-names="['4', '5', '6']"
+      :open-names="['1', '2']"
       :active-name="/^\/\w+/.exec($route.path)[0]"
       @on-select="handleSelect"
     >
-      <MenuItem name="/home">
+      
+      <MenuItem name="/index">
         <Icon type="ios-home"></Icon>
-        <span class="title">主页概况</span>
+        <span class="title">首页</span>
       </MenuItem>
+
       <Submenu name="1">
         <template slot="title">
-          <Icon type="usb"></Icon>
-          <span class="title">设备管理</span>
+          <Icon type="ios-list"></Icon>
+          <span class="title">用户详情</span>
         </template>
-        <MenuItem name="/device">设备列表</MenuItem>
-        <MenuItem name="/device_cabinet">机柜管理</MenuItem>
-        <MenuItem name="/device_charge">分时费率管理</MenuItem>
-        <MenuItem name="/device_trouble">设备故障记录</MenuItem>
-        <MenuItem name="/device_map">地图显示</MenuItem>
-        <MenuItem name="/device_firmware">固件管理</MenuItem>
+        <MenuItem name="/user_detail">用户详情</MenuItem>
+        <MenuItem name="/user_active">活跃用户</MenuItem>
       </Submenu>
+
       <Submenu name="2">
         <template slot="title">
-          <Icon type="ios-people"></Icon>
-          <span class="title">用户管理</span>
-        </template>
-        <MenuItem name="/user">用户列表</MenuItem>
-        <MenuItem name="/user_black">用户黑名单</MenuItem>
-        <MenuItem name="/user_rent">快递租借</MenuItem>
-        <MenuItem name="/user_coupon">优惠券</MenuItem>
-      </Submenu>
-      <Submenu name="3">
-        <template slot="title">
-          <Icon type="ios-chatbubble"></Icon>
-          <span class="title">消息管理</span>
-        </template>
-        <MenuItem name="/message">消息列表</MenuItem>
-      </Submenu>
-      <Submenu name="4">
-        <template slot="title">
           <Icon type="ios-list"></Icon>
-          <span class="title">互动信息管理</span>
+          <span class="title">设备授权</span>
         </template>
-        <MenuItem name="/interaction">APP反馈</MenuItem>
-        <MenuItem name="/interaction_help">帮助问题</MenuItem>
+        <MenuItem name="/device_detail">设备详情</MenuItem>
+        <MenuItem name="/device_authorize">设备授权</MenuItem>
       </Submenu>
-      <Submenu name="5">
-        <template slot="title">
-          <Icon type="ios-cart"></Icon>
-          <span class="title">商品管理</span>
-        </template>
-        <MenuItem name="/product">商品列表</MenuItem>
-        <MenuItem name="/product_order">订单管理</MenuItem>
-        <MenuItem name="/product_appraise">评价管理</MenuItem>
-      </Submenu>
-      <MenuItem name="/analysis">
-        <Icon type="stats-bars"></Icon>
-        <span class="title">数据分析</span>
+
+      <MenuItem name="/apk">
+        <Icon type="ios-home"></Icon>
+        <span class="title">APK升级</span>
       </MenuItem>
-      <Submenu name="6">
-        <template slot="title">
-          <Icon type="person-stalker"></Icon>
-          <span class="title">系统成员管理</span>
-        </template>
-        <MenuItem name="/member">成员列表</MenuItem>
-        <MenuItem name="/member_auth">权限设置</MenuItem>
-        <MenuItem name="/member_role">角色列表</MenuItem>
-        <MenuItem name="/member_log">操作日志</MenuItem>
-      </Submenu>
+
+      <MenuItem name="/firmware">
+        <Icon type="ios-home"></Icon>
+        <span class="title">固件升级</span>
+      </MenuItem>
+
+      <MenuItem name="/alert">
+        <Icon type="ios-home"></Icon>
+        <span class="title">告警管理</span>
+      </MenuItem>
+
+      <MenuItem name="/content">
+        <Icon type="ios-home"></Icon>
+        <span class="title">内容发布</span>
+      </MenuItem>
+
+      <MenuItem name="/message">
+        <Icon type="ios-home"></Icon>
+        <span class="title">消息管理</span>
+      </MenuItem>
+
+      <MenuItem name="/feedback">
+        <Icon type="ios-home"></Icon>
+        <span class="title">用户反馈</span>
+      </MenuItem>
+
+      <MenuItem name="/email">
+        <Icon type="ios-home"></Icon>
+        <span class="title">邮件管理</span>
+      </MenuItem>
+
+      <MenuItem name="/aboutus">
+        <Icon type="ios-home"></Icon>
+        <span class="title">关于我们</span>
+      </MenuItem>
+
+      <MenuItem name="/question">
+        <Icon type="ios-home"></Icon>
+        <span class="title">常见问题</span>
+      </MenuItem>
+
     </Menu>
   </Sider>
 </template>

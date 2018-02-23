@@ -4,8 +4,11 @@ module.exports = {
   HOST: "http://120.24.55.58",
   AES_KEY: "267a4733f3d89127bac20be290742c81",
 
-  // 同服务器下多客户端则为 ACCESS_TOKEN 赋不同值，防止串数据
+  // 挂在localStorage|sessionStorage下面的属性
+  // 同服务器下多客户端则为赋不同值，防止串数据
   ACCESS_TOKEN: "DT_ACCESS_TOKEN",
+  USER_INFO: "DT_USER_INFO",
+  LOGIN_INFO: "DT_LOGIN_INFO",
 
   // 路由表: 键或值不能重名
   ROUTES: {
@@ -38,15 +41,16 @@ module.exports = {
         'nickname:昵称',
         'ctime:创建时间',
         'rtime:注册时间',
-        'action:编辑|删除'
+        'action:edit|del'
       ]
     },
     'device': {
       api: 'device',
       title: '设备列表',
       slots: ['del:批量删除', 'new:注册设备'],
+      selectIdName: 'device_id',
       columns: [
-        'selection:device_id',
+        'selection',
         '_index:序号',
         'serial:序列号',
         'name:名称',
@@ -54,7 +58,7 @@ module.exports = {
         'field2:字段2',
         'ctime:创建时间',
         'rtime:注册时间',
-        'action:详情|编辑|删除'
+        'action:detail|edit|del'
       ]
     }
   },

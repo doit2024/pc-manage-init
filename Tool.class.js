@@ -53,9 +53,9 @@ module.exports = class Tool {
     config.UP_PRE = this.capitalize(config.PRE)
     return config
   }
-  // 首字母大写其余小写
+  // 首字母大写
   static capitalize (str) {
-    return str[0].toUpperCase() + str.slice(1).toLowerCase()
+    return str[0].toUpperCase() + str.slice(1)
   }
   // 判断不存在则创建目录
   static createDir (dirname, callback) {

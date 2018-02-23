@@ -1,5 +1,5 @@
 <template>
-  <DtTable title="{{$title}}" :api="{{$api}}" :keys="keys" :columns="columns">{{$slots}}</DtTable>
+  <DtTable title="{{$title}}" :api="{{$api}}" :keys="keys" :columns="columns"{{$selectIdName}}>{{$slots}}</DtTable>
 </template>
 
 <script>
@@ -9,7 +9,8 @@ export default {
       keys: {
         page: 1
       },
-      columns: [{{$columns}}]
+      columns: [{{$columns}}
+      ]
     }
   }
 }

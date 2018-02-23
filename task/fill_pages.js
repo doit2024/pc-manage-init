@@ -4,26 +4,28 @@ const Tool = require('../Tool.class')
 const { ROUTES, TABLE_PAGES } = Tool.getConfig()
 
 module.exports = dir => {
-  Object.keys(ROUTES).forEach(first => {
-    // 创建一级目录 (login|home|...])
-    let groupFirst = path.join(dir, first)
-    fs.mkdir(groupFirst, err => {
-      Tool.dieif(err)
-      // 填充 {first}/*.vue
-      Tool.copyDir(path.join(__dirname, '../lib', first), groupFirst)
-      ROUTES[first].forEach((second, index) => {
-        // 创建二级目录
-        let groupSecond = path.join(groupFirst, `${index}_${second[0]}`)
-        fs.mkdir(groupSecond, err => {
-          Tool.dieif(err, __filename, __line)
-          // 创建二级目录下的文件
-          second.forEach(page => {
-            let tablePage = TABLE_PAGES[page]
-            fs.readFile(path.join(__dirname, `../lib/page/${tablePage ? 'table' : 'simple'}.tpl`), (err, res) => {
-              Tool.dieif(err, __filename, __line)
-              let tpl = _filterTablePage(res.toString(), tablePage)
-              fs.writeFile(path.join(groupSecond, `${page}.vue`), tpl, err => {
+  require('./create_sider')(dir, () => {
+    Object.keys(ROUTES).forEach(first => {
+      // 创建一级目录 (login|home|...])
+      let groupFirst = path.join(dir, first)
+      fs.mkdir(groupFirst, err => {
+        Tool.dieif(err)
+        // 填充 {first}/*.vue
+        Tool.copyDir(path.join(__dirname, '../lib', first), groupFirst)
+        ROUTES[first].forEach((second, index) => {
+          // 创建二级目录
+          let groupSecond = path.join(groupFirst, `${index}_${second[0]}`)
+          fs.mkdir(groupSecond, err => {
+            Tool.dieif(err, __filename, __line)
+            // 创建二级目录下的文件
+            second.forEach(page => {
+              let tablePage = TABLE_PAGES[page]
+              fs.readFile(path.join(__dirname, `../lib/page/${tablePage ? 'table' : 'simple'}.tpl`), (err, res) => {
                 Tool.dieif(err, __filename, __line)
+                let tpl = _filterTablePage(res.toString(), tablePage)
+                fs.writeFile(path.join(groupSecond, `${page}.vue`), tpl, err => {
+                  Tool.dieif(err, __filename, __line)
+                })
               })
             })
           })
@@ -39,6 +41,7 @@ function _filterTablePage (tpl, filter) {
       let tmp = filter[b]
       switch (b) {
         case 'slots': tmp = _handleSlots(filter); break
+        case 'selectIdName': tmp = tmp ? ` selectIdName="${tmp}"` : ''; break
         case 'columns': tmp = _handleColumns(filter); break
       }
       return tmp
@@ -50,58 +53,63 @@ function _filterTablePage (tpl, filter) {
 function _handleSlots(filter) {
   let tpl = ''
   let slots = filter.slots
+  let isWrapTemplate = false
   if (slots.length) {
     slots.forEach(item => {
       aItem = item.split(':')
-      if (aItem[0] === 'new') {
-        tpl += `${tpl ? '' : '\n'}    <DtBtnNew api="${filter.api}">${aItem[1]}</DtBtnNew>\n`
-      }
-      if (aItem[0] === 'del') {
-        tpl += `${tpl ? '' : '\n'}    <DtBtnDel api="${filter.api}">${aItem[1]}</DtBtnDel>\n`
+      switch (aItem[0]) {
+        case 'new':
+          tpl += `${tpl ? '' : '\n'}${isWrapTemplate ? '      ' : '    '}<DtBtnNew api="${filter.api}">${aItem[1]}</DtBtnNew>\n`
+        break
+        case 'del':
+          isWrapTemplate = true
+          tpl = `\n    <template slot-scope="props">${tpl}`
+          tpl += `\n      <DtBtnDel api="${filter.api}" :target="props.target">${aItem[1]}</DtBtnDel>\n`
+        break
+        default:
+          Tool.error('not config:' + aItem[0])
       }
     })
   }
-  return tpl && tpl + '  '
+  return tpl && tpl + (isWrapTemplate ? '    </template>\n  ' : '  ')
 }
 
 function _handleColumns(filter) {
   let tpl = ''
   let columns = filter.columns
+  let pre = '\n        '
   columns.forEach(item => {
-    aItem = item.split(':')
-    switch (aItem[0]) {
-      case 'selection':
-      tpl += `{
-        width: 60,
-        type: 'selection',
-        align: 'center'
-      }`
-      break
-      case '_index':
-      tpl += `${tpl ? ', ' : ''}{
-        width: 60,
-        title: '${aItem[1]}',
-        key: 'index',
-        render: (h, params) => h('span', params.row._index)
-      }`
-      break
+    let [key, title] = item.split(':')
+    switch (key) {
+      case 'selection': tpl += `${pre}this.$commonColumns.selection`; break
+      case '_index': tpl += `${tpl ? ',' : ''}${pre}this.$commonColumns.orderIndex`; break
+      case 'ctime': tpl += `${tpl ? ',' : ''}${pre}this.$commonColumns.ctime`; break
+      case 'atime': tpl += `${tpl ? ',' : ''}${pre}this.$commonColumns.atime`; break
       case 'action':
-      let actions = aItem[1].split('|')
-      tpl += `, {
-        title: '操作',
-        key: 'action',
-        render: (h, params) => h('div', {
-          class: 'flex'
-        }, [
-          ${actions.map(act => act)}
-        ])
-      }`
+      let actions = title.split('|')
+      tpl += `,
+        {
+          title: '操作',
+          key: 'action',
+          render: (h, params) => h('div', {
+            attrs: { style: 'display: flex' }
+          }, [
+            ${actions.map(act => {
+              switch (act) {
+                case 'detail': return `this.$commonColumns.hDetail(h, params, {'router|modal': '---'})`
+                case 'edit': return `this.$commonColumns.hEdit(h, params, {'router|modal': '---'})`
+                case 'del': return `this.$commonColumns.hDel(h, params, {api: '${filter.api}'})`
+              }
+            }).join(',\n            ')}
+          ])
+        }`
       break
       default:
-      tpl += `${tpl ? ', ' : ''}{
-        title: '${aItem[1]}',
-        key: '${aItem[0]}'
-      }`
+        tpl += `${tpl ? ', ' : ''}
+        {
+          title: '${title}',
+          key: '${key}'
+        }`
     }
   })
   return tpl

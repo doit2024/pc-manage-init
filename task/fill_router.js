@@ -3,14 +3,18 @@ const path = require('path')
 const Tool = require('../Tool.class')
 const { ROUTES } = Tool.getConfig()
 
-const template = (first, second, page) => `const ${page.padEnd(30)} = () => import('@/pages/${path.join(first, second, page)}')\n`
+const template = (first, second, page) => `const ${page.padEnd(30)} = () => import('@/pages/${first}/${second}/${page})')\n`
 
 let content = `import Vue from 'vue'\nimport Router from 'vue-router'\n`
 
 let routes = [{ path: '/', redirect: '/home' }]
 Object.keys(ROUTES).forEach(first => {
-  content += `\nconst ${first.padEnd(30)} = () => import('@/pages/${path.join(first, 'index')}')\n`
-  let routerView = { path: `/${first}`, component: first, children: [{ path: '/', redirect: `/${ROUTES[first][0][0]}` }] }
+  content += `\nconst ${first.padEnd(30)} = () => import('@/pages/${first}/index)')\n`
+  let routerView = {
+    path: `/${first}`,
+    component: first,
+    children: [{ path: '/', redirect: `/${ROUTES[first][0][0]}` }]
+  }
   ROUTES[first].forEach((pages, index) => {
     pages.forEach(page => {
       content += template(first, `${index}_${pages[0]}`, page)
@@ -21,8 +25,9 @@ Object.keys(ROUTES).forEach(first => {
 })
 
 content += `\nVue.use(Router)\n
+const routes = ${JSON.stringify(routes, null, 2).replace(/("component"\:\s?)"(\w+)"/g, '$1$2')}\n
 export default new Router({
-  routes: ${JSON.stringify(routes, null, 2).replace(/("component"\:\s?)"(\w+)"/g, '$1$2')}
+  routes
 })
 `
 

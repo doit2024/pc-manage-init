@@ -6,6 +6,8 @@ const Tool = require('../Tool.class')
 const CFG = require('../config')
 const { UP_PRE } = Tool.getConfig()
 
+const template = component => `import ${component.name.padEnd(19)} from '${component.path}'\n`
+
 function getComponents (startPath) {
   let components = []
   findComponents(startPath)
@@ -15,7 +17,10 @@ function getComponents (startPath) {
       let childPath = path.join(dir, child)
       let st = fs.statSync(childPath)
       if (st.isFile()) {
-        /\.vue$/.test(child) && components.push({name: UP_PRE + Tool.capitalize(child).replace('.vue', ''), path: childPath.replace(/.+components(.+)\.vue/, '.$1')})
+        /\.vue$/.test(child) && components.push({
+          name: UP_PRE + Tool.capitalize(child).replace('.vue', ''),
+          path: childPath.replace(/.+components(.+)\.vue/, '.$1').replace(/\\/g, '/')
+        })
       } else {
         findComponents(childPath)
       }
@@ -26,7 +31,6 @@ function getComponents (startPath) {
 const target = Tool.find('src/components')
 let components = getComponents(target)
 if (new Set(components.map(v => v.name)).size !== components.length) return Tool.error('～组件名称重复～')
-const template = component => `import ${component.name.padEnd(15)} from '${component.path}'\n`
 
 let up = '', down = ''
 components.forEach((component, index) => {
