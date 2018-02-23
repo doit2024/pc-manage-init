@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { ACCESS_TOKEN, USER_INFO, LOGIN_INFO } from '../../pro.config'
+import { ACCESS_TOKEN, USER_INFO, LOGIN_INFO } from '../../php/project'
 import { aes } from '@/global/funs'
 export default {
   data: () => ({

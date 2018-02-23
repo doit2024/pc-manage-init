@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { ACCESS_TOKEN } from '@/../pro.config'
+import { ACCESS_TOKEN } from '@/../php/project'
 // import { mapGetters } from 'vuex'
 export default {
   data: () => ({

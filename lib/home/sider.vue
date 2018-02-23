@@ -15,7 +15,7 @@
       <Submenu name="1">
         <template slot="title">
           <Icon type="ios-list"></Icon>
-          <span class="title">用户详情</span>
+          <span class="title">用户</span>
         </template>
         <MenuItem name="/user_detail">用户详情</MenuItem>
         <MenuItem name="/user_active">活跃用户</MenuItem>
@@ -24,7 +24,7 @@
       <Submenu name="2">
         <template slot="title">
           <Icon type="ios-list"></Icon>
-          <span class="title">设备授权</span>
+          <span class="title">设备</span>
         </template>
         <MenuItem name="/device_detail">设备详情</MenuItem>
         <MenuItem name="/device_authorize">设备授权</MenuItem>

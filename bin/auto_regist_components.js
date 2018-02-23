@@ -3,7 +3,6 @@
 const fs = require('fs')
 const path = require('path')
 const Tool = require('../Tool.class')
-const CFG = require('../config')
 const { UP_PRE } = Tool.getConfig()
 
 const template = component => `import ${component.name.padEnd(19)} from '${component.path}'\n`

@@ -3,8 +3,9 @@
     "name": "nudazhuang"
   },
   "bin": {
-    "pc-manage-init": "./bin/pc_init.js",
-    "update-components": "./bin/update_components.js"
+    "auto_regist_components": "./bin/auto_regist_components.js",
+    "create_ajax_from_doc": "./bin/create_ajax_from_doc.js",
+    "pc-manage-init": "./bin/pc_init.js"
   },
   "description": "manage system structure auto init..",
   "homepage": "https://github.com/niuDazhuang/pc_manage_init#readme",
@@ -22,7 +23,7 @@
     "type": "git",
     "url": "git+https://github.com/niuDazhuang/pc-manage-init.git"
   },
-  "version": "1.0.14",
+  "version": "1.0.17",
   "dependencies": {
     "chalk": "^2.3.1",
     "co": "^4.6.0",

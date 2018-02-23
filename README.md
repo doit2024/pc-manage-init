@@ -6,8 +6,8 @@
 
 ## 使用
 > 1. package.json->scripts + (注意加密系统， 改名添加再改回来)
->  * "ua": "update-api",
->  * "uc": "update-components",
+>  * "com": "auto_regist_components",
+>  * "api": "create_ajax_from_doc",
 >  * "init": "pc-manage-init",
 > 2. 初始化 -------- npm run init
 > 3. 组件注册 ------ npm run uc

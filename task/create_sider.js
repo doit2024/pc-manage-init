@@ -1,15 +1,14 @@
 const fs = require('fs')
 const path = require('path')
 const Tool = require('../Tool.class')
-const { SIDER } = Tool.getConfig()
-const { ROUTES } = Tool.getConfig()
+const { SIDER, ROUTES } = Tool.getConfig()
 const SIDER_MAP = ROUTES['home']
 
 const getTmpSubmenu = (index, arrPath, arrName) => `
       <Submenu name="${index}">
         <template slot="title">
           <Icon type="ios-list"></Icon>
-          <span class="title">${arrName[index]}</span>
+          <span class="title">${arrName[0]}</span>
         </template>${arrName.map((name, index) => {
           return index ? `\n        <MenuItem name="/${arrPath[index]}">${name}</MenuItem>` : ''
         }).join('')}

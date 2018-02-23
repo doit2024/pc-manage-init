@@ -3,6 +3,8 @@ const path = require('path')
 const chalk = require('chalk')
 const CFG = require('./config')
 
+const rootdir = __dirname.replace(/node_modules.+$/, '')
+
 Object.defineProperty(global, '__stack', {
     get: function(){
       var orig = Error.prepareStackTrace
@@ -39,15 +41,15 @@ module.exports = class Tool {
   }
   // 从项目根目录下找文件
   static find (filename) {
-    return path.join(CFG['root_dir'], filename)
+    return path.join(rootdir, filename)
   }
   // 获取配置信息
   static getConfig () {
-    let config = require(this.find(CFG['config_file']))
+    let config = require(this.find(path.join(CFG['dirname'], CFG['filename'])))
     let routes = {}
-    Object.keys(config.ROUTES).forEach(grp => {
+    Object.keys(config.ROUTES).forEach(first => {
       // 统一为数组
-      routes[grp] = config.ROUTES[grp].map(page => Array.isArray(page) ? page : [page])
+      routes[first] = config.ROUTES[first].map(page => Array.isArray(page) ? page : [page])
     })
     config.ROUTES = routes
     config.UP_PRE = this.capitalize(config.PRE)
