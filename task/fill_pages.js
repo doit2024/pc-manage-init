@@ -40,7 +40,7 @@ function _filterTablePage (tpl, filter) {
     tpl = tpl.replace(/\{\{\$(\w+)\}\}/g, (a, b, c) => {
       let tmp = filter[b]
       switch (b) {
-        case 'slots': tmp = _handleSlots(filter); break
+        case 'slots': tmp = tmp ? _handleSlots(filter) : ''; break
         case 'selectIdName': tmp = tmp ? ` selectIdName="${tmp}"` : ''; break
         case 'columns': tmp = _handleColumns(filter); break
       }
@@ -50,22 +50,22 @@ function _filterTablePage (tpl, filter) {
   return tpl
 }
 
-function _handleSlots(filter) {
+function _handleSlots (filter) {
   let tpl = ''
   let slots = filter.slots
   let isWrapTemplate = false
   if (slots.length) {
     slots.forEach(item => {
-      aItem = item.split(':')
+      let aItem = item.split(':')
       switch (aItem[0]) {
         case 'new':
           tpl += `${tpl ? '' : '\n'}${isWrapTemplate ? '      ' : '    '}<DtBtnNew api="${filter.api}">${aItem[1]}</DtBtnNew>\n`
-        break
+          break
         case 'del':
           isWrapTemplate = true
           tpl = `\n    <template slot-scope="props">${tpl}`
           tpl += `\n      <DtBtnDel api="${filter.api}" :target="props.target">${aItem[1]}</DtBtnDel>\n`
-        break
+          break
         default:
           Tool.error('not config:' + aItem[0])
       }
@@ -74,7 +74,7 @@ function _handleSlots(filter) {
   return tpl && tpl + (isWrapTemplate ? '    </template>\n  ' : '  ')
 }
 
-function _handleColumns(filter) {
+function _handleColumns (filter) {
   let tpl = ''
   let columns = filter.columns
   let pre = '\n        '
@@ -96,6 +96,7 @@ function _handleColumns(filter) {
           }, [
             ${actions.map(act => {
               switch (act) {
+                case 'download': return `this.$commonColumns.hDownload(h, params)`
                 case 'detail': return `this.$commonColumns.hDetail(h, params, {'router|modal': '---'})`
                 case 'edit': return `this.$commonColumns.hEdit(h, params, {'router|modal': '---'})`
                 case 'del': return `this.$commonColumns.hDel(h, params, {api: '${filter.api}'})`

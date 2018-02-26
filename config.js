@@ -1,7 +1,7 @@
 
 module.exports = {
-   dirname: 'php',
-  filename: 'project.js',
-    apidoc: 'doc.php',
-   require: ['project.js', 'header.json', 'doc.php']
+  dirname  : 'php',
+  filename : 'project.js',
+  apidoc   : 'index.php',
+  require  : ['project.js', 'apidoc.json', 'index.php']
 }

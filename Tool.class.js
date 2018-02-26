@@ -6,19 +6,19 @@ const CFG = require('./config')
 const rootdir = __dirname.replace(/node_modules.+$/, '')
 
 Object.defineProperty(global, '__stack', {
-    get: function(){
-      var orig = Error.prepareStackTrace
-      Error.prepareStackTrace = function(_, stack){ return stack; }
-      var err = new Error
-      Error.captureStackTrace(err, arguments.callee)
-      var stack = err.stack
-      Error.prepareStackTrace = orig
-      return stack
+  get () {
+    var orig = Error.prepareStackTrace
+    Error.prepareStackTrace = function (_, stack) { return stack }
+    var err = new Error()
+    Error.captureStackTrace(err, arguments.callee)
+    var stack = err.stack
+    Error.prepareStackTrace = orig
+    return stack
   }
 })
 Object.defineProperty(global, '__line', {
-  get: function(){
-    return __stack[1].getLineNumber();
+  get () {
+    return __stack[1].getLineNumber()
   }
 })
 
@@ -33,11 +33,12 @@ module.exports = class Tool {
   }
   // 控制台任务进度打印
   static success (info) {
-    console.log(chalk.green(`<=============== ${info} ===============>\n`))
+    console.log(chalk.green(`=> ${info} \n`))
   }
   // 错误提示打印
-  static error (info) {
-    console.log(chalk.red(`<！！！！！！！！！！ ${info} ！！！！！！！！！！>\n`))
+  static error (info, next) {
+    console.log(chalk.red(`=> ${info} ！！=>\n`))
+    next && console.log(chalk.red(`=> ${next} ！！=>\n`))
   }
   // 从项目根目录下找文件
   static find (filename) {
@@ -62,8 +63,8 @@ module.exports = class Tool {
   // 判断不存在则创建目录
   static createDir (dirname, callback) {
     const dir = this.find(path.join('src', dirname))
-    fs.exists(dir, exist => {
-      if (!exist) {
+    fs.access(dir, err => {
+      if (err) {
         fs.mkdir(dir, err => {
           this.dieif(err, __filename, __line)
           callback(dir)
@@ -89,13 +90,13 @@ module.exports = class Tool {
         fs.stat(childFrom, (err, stat) => {
           this.dieif(err, __filename, __line)
           if (stat.isFile()) {
-            fs.exists(childTo, exist => {
-              if (exist) return
+            fs.access(childTo, err => {
+              if (!err) return
               this.copyFile(childFrom, childTo)
             })
           } else {
-            fs.exists(childTo, exist => {
-              if (exist) return
+            fs.access(childTo, err => {
+              if (!err) return
               fs.mkdir(childTo, err => {
                 this.dieif(err, __filename, __line)
                 this.copyDir(childFrom, childTo)
@@ -115,14 +116,14 @@ module.exports = class Tool {
   // 若target存在, 将list添加到target中
   static addTo (target, list) {
     if (!Array.isArray(list)) list = [list]
-    fs.exists(target, exist => {
-      if (exist) {
+    fs.access(target, err => {
+      if (!err) {
         fs.readFile(target, (err, res) => {
           Tool.dieif(err)
           let data = res.toString()
           list.forEach((str, index) => {
             if (!data.includes(str)) {
-              fs.appendFile(target, `${index?'':'\n'}${str}\n`, err => {
+              fs.appendFile(target, `${index ? '' : '\n'}${str}\n`, err => {
                 Tool.dieif(err)
                 Tool.success(`add ${str} to ${path.basename(target)}!`)
               })

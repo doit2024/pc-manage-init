@@ -7,10 +7,9 @@ const from = path.join(__dirname, '..', config.dirname)
 const to = Tool.find(config.dirname)
 
 module.exports = cb => {
-  
-  fs.exists(to, exist => {
-
-    if (!exist) {
+  fs.access(to, err => {
+    if (err) {
+      Tool.addTo(Tool.find('.gitignore'), '/' + config.dirname)
       fs.mkdirSync(to)
       Tool.copyDir(from, to)
       Tool.error(`请配置${config.dirname}/${config.filename}!`)
@@ -23,6 +22,5 @@ module.exports = cb => {
         Tool.error(`或删除php重新init生成默认文件`)
       }
     }
-
   })
 }

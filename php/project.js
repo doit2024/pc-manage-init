@@ -1,14 +1,14 @@
 module.exports = {
-  PRE: "dt",
+  PRE: 'dt',
   PORT: 8022,
-  HOST: "http://120.24.55.58",
-  AES_KEY: "267a4733f3d89127bac20be290742c81",
+  HOST: 'http://120.24.55.58',
+  AES_KEY: '267a4733f3d89127bac20be290742c81',
 
   // 挂在localStorage|sessionStorage下面的属性
   // 同服务器下多客户端则为赋不同值，防止串数据
-  ACCESS_TOKEN: "DT_ACCESS_TOKEN",
-  USER_INFO: "DT_USER_INFO",
-  LOGIN_INFO: "DT_LOGIN_INFO",
+  ACCESS_TOKEN: 'DT_ACCESS_TOKEN',
+  USER_INFO: 'DT_USER_INFO',
+  LOGIN_INFO: 'DT_LOGIN_INFO',
 
   // 路由表: 键或值不能重名
   ROUTES: {
@@ -29,6 +29,21 @@ module.exports = {
       'question'
     ]
   },
+  // 左侧菜单栏, 与 ROUTE.home 对应
+  SIDER: [
+    '首页',
+    ['用户', '用户详情', '活跃用户'],
+    ['设备', '设备详情', '设备授权'],
+    'APK升级',
+    '固件升级',
+    '告警管理',
+    '内容发布',
+    '消息管理',
+    '用户反馈',
+    '邮件管理',
+    '关于我们',
+    '常见问题'
+  ],
 
   // 有表格的页面, 键名与ROUTES保持一致
   TABLE_PAGES: {
@@ -41,7 +56,7 @@ module.exports = {
         'nickname:昵称',
         'ctime:创建时间',
         'rtime:注册时间',
-        'action:edit|del'
+        'action:detail|edit|del'
       ]
     },
     'device': {
@@ -58,24 +73,8 @@ module.exports = {
         'field2:字段2',
         'ctime:创建时间',
         'rtime:注册时间',
-        'action:detail|edit|del'
+        'action:download|edit|del'
       ]
     }
-  },
-
-  // 左侧菜单栏, 与 ROUTE.home 对应
-  SIDER: [
-    '首页',
-    ['用户', '用户详情', '活跃用户'],
-    ['设备', '设备详情', '设备授权'],
-    'APK升级',
-    '固件升级',
-    '告警管理',
-    '内容发布',
-    '消息管理',
-    '用户反馈',
-    '邮件管理',
-    '关于我们',
-    '常见问题'
-  ]
+  }
 }

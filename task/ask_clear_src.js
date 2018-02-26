@@ -7,8 +7,8 @@ const Tool = require('../Tool.class')
 const fs = require('fs')
 
 module.exports = cb => {
-  co(function *(){
-    const ok = yield prompt.confirm(chalk.red.bold('<=============== 是否清空/src?(yes/no) '))
+  co(function *() {
+    const ok = yield prompt.confirm(chalk.red.bold('=> 是否清空/src?(yes/no) '))
     console.log('\n')
     process.stdin.pause()
     if (ok) {
@@ -23,4 +23,3 @@ module.exports = cb => {
     }
   })
 }
-

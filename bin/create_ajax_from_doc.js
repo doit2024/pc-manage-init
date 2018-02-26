@@ -8,20 +8,33 @@ const Tool = require('../Tool.class')
 const target = Tool.find(path.join(config.dirname, config.apidoc))
 
 let apiContent = `
-export default `
+import ajax from './ajax'
+import { aes } from '@/global'
+export default {
+  account: {
+    login: ({username, password}) => ajax({url: 'account/login',
+      data: {
+        username: username && aes.encrypt(username),
+        password: password && aes.encrypt(password)
+      },
+      whereCatch: 'local'
+    }),
+    logout: () => ajax({url: 'account/logout', whereCatch: 'local'})
+  },
+`
 let mockContent = `
 export default {
 `
 
-fs.exists(target, exist => {
-  if (!exist) return Tool.error(`没有找到${config.apidoc}文件`)
+fs.access(target, (err) => {
+  if (err) return Tool.error(`没有找到${config.apidoc}文件`, '尝试 npm run init')
   fs.readFile(target, (err, res) => {
     Tool.dieif(err, __filename, __line)
     const data = res.toString()
     let arrApi = data.split(/\*\/\s*\n*\/\*\*/)
     let allApi = {}
     arrApi.forEach((item, index) => {
-      let $api = /@api\s\{\w+\}\s([\/a-zA-Z_]+)\s(.+)/.exec(item)
+      let $api = /@api\s\{\w+\}\s([/a-zA-Z_]+)\s(.+)/.exec(item)
       let path = $api[1].toLowerCase()
       let cnInfo = $api[2]
       let mock = item.replace(/\*.*/g, '').trim()
@@ -29,11 +42,11 @@ fs.exists(target, exist => {
       allApi[module] = {}
       allApi[module][action] = `data => ajax({url: '${path}', data})`
       index && (mockContent += `${index === 1 ? '' : '\n'}// '${cnInfo}':
-      '${path}':
+      '/local/${path}':
       ${mock},`)
     })
     // 生成 api
-    apiContent += JSON.stringify(allApi, null, 2).replace(/"/g, '')
+    apiContent += JSON.stringify(allApi, null, 2).replace(/"/g, '').slice(1)
     fs.writeFile(
       Tool.find('src/ajax/index.js'),
       apiContent,
