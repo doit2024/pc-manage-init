@@ -14,7 +14,7 @@
 <script>
 import DtHeader from './header'
 import DtSider from './sider'
-import DtModal from './modal'
+import DtModal from '../modal'
 export default {
   components: {
     DtHeader,

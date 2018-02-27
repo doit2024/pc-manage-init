@@ -27,7 +27,8 @@ module.exports = {
       'email',
       'aboutus',
       'question'
-    ]
+    ],
+    modal: []
   },
   // 左侧菜单栏, 与 ROUTE.home 对应
   SIDER: [

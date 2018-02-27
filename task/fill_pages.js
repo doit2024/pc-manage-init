@@ -6,7 +6,7 @@ const { ROUTES, TABLE_PAGES } = Tool.getConfig()
 module.exports = dir => {
   require('./create_sider')(dir, () => {
     Object.keys(ROUTES).forEach(first => {
-      // 创建一级目录 (login|home|...])
+      // 创建一级目录 (login|home|modal|...])
       let groupFirst = path.join(dir, first)
       fs.mkdir(groupFirst, err => {
         Tool.dieif(err)

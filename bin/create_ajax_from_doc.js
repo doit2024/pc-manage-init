@@ -8,8 +8,8 @@ const Tool = require('../Tool.class')
 const target = Tool.find(path.join(config.dirname, config.apidoc))
 
 let apiContent = `
-import ajax from './ajax'
-import { aes } from '@/global'
+import ajax from './core'
+import { aes } from '@/global'\n
 export default {
   account: {
     login: ({username, password}) => ajax({url: 'account/login',
@@ -46,17 +46,23 @@ fs.access(target, (err) => {
       ${mock},`)
     })
     // 生成 api
-    apiContent += JSON.stringify(allApi, null, 2).replace(/"/g, '').slice(1)
+    apiContent += JSON.stringify(allApi, null, 2).replace(/"/g, '').slice(1) + '\n'
     fs.writeFile(
       Tool.find('src/ajax/index.js'),
       apiContent,
-      err => Tool.dieif(err, __filename, __line)
+      err => {
+        Tool.dieif(err, __filename, __line)
+        Tool.success('api -> ok')
+      }
     )
     // 生成 mock 数据
     fs.writeFile(
       Tool.find('src/ajax/mock.js'),
       mockContent.replace(/,$/, '\n}'),
-      err => Tool.dieif(err, __filename, __line)
+      err => {
+        Tool.dieif(err, __filename, __line)
+        Tool.success('mock -> ok')
+      }
     )
   })
 })

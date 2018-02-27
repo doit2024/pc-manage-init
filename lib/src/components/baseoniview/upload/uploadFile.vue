@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { baseUrl } from '@/config'
+import { baseUrl } from '@/env'
 const names = {
   'apk': /\.apk$/i,
   'bin': /\.bin$/i,

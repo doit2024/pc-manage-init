@@ -1,7 +1,7 @@
 <template>
   <Header id="header">
     <div class="header_logo" @mouseenter="$store.dispatch('showSider', true)" @mouseleave="$store.dispatch('showSider', false)">
-      <img src="../assets/logo.png" alt="">
+      <img src="../../assets/logo.png" alt="">
     </div>
     <h1  class="header_title">XXXX后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
