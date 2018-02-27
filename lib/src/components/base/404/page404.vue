@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style lang=scss scoped>
+<style lang=less scoped>
 #page404 {
   height: 100%;
   background: black;

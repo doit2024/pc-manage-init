@@ -25,8 +25,8 @@ export default {
 }
 </script>
 
-<style lang=scss>
-@import '../scss/var';
+<style lang=less>
+@import '../less/var';
 #sider {
   position: absolute;
   bottom: 0;
@@ -52,13 +52,13 @@ export default {
     background-color: rgba(0,155,155,.05);
   }
   .ivu-menu-item-active .ivu-menu-submenu-title {
-    /* color: $color-theme; */
-    color: $color-success;
+    /* color: @color-theme; */
+    color: @color-success;
     /* background-color: rgba(0,155,155,.05); */
     background: linear-gradient(90deg,rgba(0,155,155,.05),rgba(0,155,155,.08), rgba(0,155,155,.3));
   }
   .ivu-menu-item-selected {
-    color: $color-success;
+    color: @color-success;
     /* background: linear-gradient(rgba(0,155,155,.08), #fff, rgba(0,155,155,.08)); */
     background: linear-gradient(#fff, rgba(0,155,155,.05), #fff);
   }

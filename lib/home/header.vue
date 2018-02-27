@@ -3,7 +3,7 @@
     <div class="header_logo" @mouseenter="$store.dispatch('showSider', true)" @mouseleave="$store.dispatch('showSider', false)">
       <img src="../assets/logo.png" alt="">
     </div>
-    <h1  class="header_title">{{$cName}}后台管理系统</h1>
+    <h1  class="header_title">XXXX后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
       <img v-if="userInfo.avatar" :src="userInfo.avatar">
       <!-- <img v-else src="../assets/avatar_default.png"> -->
@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style lang=scss>
+<style lang=less>
 @import '../../style/base/var';
 #header {
   display: flex;

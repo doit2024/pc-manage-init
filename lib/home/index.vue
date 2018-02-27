@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang=scss>
+<style lang=less>
 @import '../../style/base/var';
 #home {
   display: flex;
@@ -34,7 +34,7 @@ export default {
     position: fixed;
     left: 0;
     right: 0;
-    top: $header-height;
+    top: @header-height;
     bottom: 0;
   }
   .child {

@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<style lang=scss>
+<style lang=less>
   $size: 80px;
   .loading {
     position: absolute;

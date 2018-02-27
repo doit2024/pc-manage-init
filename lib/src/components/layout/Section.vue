@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang=scss>
+<style lang=less>
 .dt-section {
   margin-bottom: 25px;
   .header {

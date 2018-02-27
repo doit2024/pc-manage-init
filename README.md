@@ -1,7 +1,7 @@
-# 编写中....
+# ....
 
 ## 项目依赖
-> vue-cli vue-router iview babel-polyfill vuex
+> vue-cli vue-router iview babel-polyfill vuex less
 
 ## 使用
 
@@ -32,7 +32,7 @@
 >
 > **5 _ 安装开发环境依赖**
 > ```
-> cnpm i -D node-sass sass-loader pc-manage-init
+> cnpm i -D less less-loader pc-manage-init
 > ```
 >
 > **6 _ 安装生产环境依赖**
@@ -54,13 +54,14 @@
 > * project.js  ---  项目整体信息配置
 > * index.php  ---  API 文档
 > * apidoc.json --- 文档头
+> * apidoc.js   --- copy API 文档, 避免加密
 >
-> **10 - 组件注册**
+> **10 _ 组件注册**
 > ```
 > npm run com
 > ```
 >
-> **11 - 更新 ajax / api & mock**
+> **11 _ 更新 ajax / api & mock**
 > ```
 > npm run api
 > ```

@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style lang=scss>
+<style lang=less>
   @import './style/base/reset';
   @import './style/base/atom';
   @import './style/base/anim';
