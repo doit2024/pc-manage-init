@@ -23,7 +23,7 @@
     "type": "git",
     "url": "git+https://github.com/niuDazhuang/pc-manage-init.git"
   },
-  "version": "1.0.17",
+  "version": "1.0.18",
   "dependencies": {
     "chalk": "^2.3.1",
     "co": "^4.6.0",
