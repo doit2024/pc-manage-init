@@ -1,13 +1,14 @@
 <template>
   <Header id="header">
     <div class="header_logo" @mouseenter="$store.dispatch('showSider', true)" @mouseleave="$store.dispatch('showSider', false)">
-      <img src="../../assets/logo.png" alt="">
+      <img class="logo" src="../../assets/logo.png" alt="">
+      <Icon class="icon" type="navicon-round"></Icon>
     </div>
-    <h1  class="header_title">XXXX后台管理系统</h1>
+    <h1  class="header_title ellipsis">XXXX后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
       <img v-if="userInfo.avatar" :src="userInfo.avatar">
       <!-- <img v-else src="../assets/avatar_default.png"> -->
-      <span class="welcome">{{ userInfo.fullname }}</span>
+      <span>{{ userInfo.fullname }}</span>
       <Icon type="arrow-down-b" :class="{'dropdown-tran': visible}"></Icon>
       <DropdownMenu slot="list">
         <li class="ivu-dropdown-item" @click="$store.dispatch('showModal', {name: 'user-edit'})">账号信息</li>
@@ -69,9 +70,8 @@ export default {
   .header {
     &_logo {
       height: 100%;
-      img {
-        height: 100%;
-      }
+      img { height: 100%; }
+      .icon { font-size: 20px; }
     }
     &_title {
       font-size: 20px;

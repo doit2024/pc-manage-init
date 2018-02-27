@@ -1,5 +1,5 @@
 <template>
-  <DtTable title="{{$title}}" :api="{{$api}}" :keys="keys" :columns="columns"{{$selectIdName}}>{{$slots}}</DtTable>
+  <DtTable title="{{$title}}" api="{{$api}}" :keys="keys" :columns="columns"{{$selectIdName}}>{{$slots}}</DtTable>
 </template>
 
 <script>

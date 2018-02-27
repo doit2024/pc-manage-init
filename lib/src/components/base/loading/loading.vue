@@ -15,7 +15,7 @@
 </template>
 
 <style lang=less>
-  $size: 80px;
+  @size: 80px;
   .loading {
     position: absolute;
     top: 0;
@@ -30,8 +30,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: $size;
-      height: $size;
+      width: @size;
+      height: @size;
     }
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <Sider id="sider" v-scrollbar :class="{show: isShowSider}">
+  <Sider id="sider" :class="{show: isShowSider}">
     <Menu
       style="width: 200px;"
       :open-names="[]"
@@ -86,20 +86,6 @@ export default {
   .ivu-icon {
     width: 13px;
     font-size: 16px;
-  }
-  .ivu-menu-submenu-title {
-    background-color: rgba(0,155,155,.05);
-  }
-  .ivu-menu-item-active .ivu-menu-submenu-title {
-    /* color: @color-theme; */
-    color: @color-success;
-    /* background-color: rgba(0,155,155,.05); */
-    background: linear-gradient(90deg,rgba(0,155,155,.05),rgba(0,155,155,.08), rgba(0,155,155,.3));
-  }
-  .ivu-menu-item-selected {
-    color: @color-success;
-    /* background: linear-gradient(rgba(0,155,155,.08), #fff, rgba(0,155,155,.08)); */
-    background: linear-gradient(#fff, rgba(0,155,155,.05), #fff);
   }
 }
 .ivu-menu-vertical.ivu-menu-light:after {

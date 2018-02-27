@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { ACCESS_TOKEN, USER_INFO, LOGIN_INFO } from '../../php/project'
+import { ACCESS_TOKEN, USER_INFO, LOGIN_INFO } from '../../../../php/project'
 import { aes } from '@/global/funs'
 export default {
   data: () => ({
@@ -58,8 +58,8 @@ export default {
     submit () {
       this.$refs['form'].validate(valid => {
         if (!valid) return
-        this.doLogin()
-        // this.$router.replace('./home')
+        // this.doLogin()
+        this.$router.replace('./home')
       })
     },
     doLogin () {

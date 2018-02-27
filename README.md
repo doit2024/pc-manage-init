@@ -67,4 +67,12 @@
 > ```
 
 
-## .......
+## 坑s
+
+> 1. 如果出现 less 相关问题，确认正确写法仍然报错，则可能是less 与 less-loader 版本不匹配导致，
+> 可以在 package.json中手动加上依赖, 例：
+> * "less": "^2.7.3",
+> * "less-loader": "^2.2.3",
+
+> 2. eslint: Parsing error: x-invalid-end-tag
+> .eslintrc.js 的 rules 加上： "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]

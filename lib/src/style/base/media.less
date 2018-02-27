@@ -1,5 +1,9 @@
 @import './var';
 @media screen and (max-width: @screen-min-width) {
+  #header {
+    .logo { display: none; }
+    .icon { display: inline-block }
+  }
   #sider {
     transition: all .4s @animate-curve;
     left: -@sidebar-width;
@@ -10,6 +14,10 @@
 }
 
 @media screen and (min-width: @screen-min-width) {
+  #header {
+    .logo { display: inline-block; }
+    .icon { display: none }
+  }
   #sider {
     transition: all 0.4s @animate-curve;
     left: 0;

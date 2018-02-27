@@ -1,5 +1,4 @@
 const fs = require('fs')
-const path = require('path')
 const Tool = require('../Tool.class')
 const { HOST, PORT } = Tool.getConfig()
 
@@ -19,7 +18,7 @@ module.exports = () => {
       }
     },`)
       .replace(/(port:\s?)\d+/, `$1${PORT}`)
-      .replace(/(assetsPublicPath: ')(\/')/, '$1.$2')
+      // .replace(/(assetsPublicPath: ')(\/')/, '$1.$2')
     fs.writeFile(target, data, err => {
       Tool.dieif(err, __filename, __line)
       Tool.success('本地代理设置完成！')
