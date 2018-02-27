@@ -6,7 +6,6 @@
       :active-name="/^\/\w+/.exec($route.path)[0]"
       @on-select="handleSelect"
     >
-      
       <MenuItem name="/index">
         <Icon type="ios-home"></Icon>
         <span class="title">首页</span>
@@ -66,7 +65,7 @@ export default {
 </script>
 
 <style lang=less>
-@import '../less/var';
+@import '../../style/base/var';
 #sider {
   position: absolute;
   bottom: 0;

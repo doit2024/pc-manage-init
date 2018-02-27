@@ -31,7 +31,8 @@ const target = Tool.find('src/components')
 let components = getComponents(target)
 if (new Set(components.map(v => v.name)).size !== components.length) return Tool.error('～组件名称重复～')
 
-let up = '', down = ''
+let up = ''
+let down = ''
 components.forEach((component, index) => {
   up += template(component)
   down += `${index ? '\n  ,' : '  '}${component.name}`

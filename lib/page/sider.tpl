@@ -5,8 +5,7 @@
       :open-names="[{{$openNames}}]"
       :active-name="/^\/\w+/.exec($route.path)[0]"
       @on-select="handleSelect"
-    >
-      {{$content}}
+    >{{$content}}
     </Menu>
   </Sider>
 </template>
@@ -26,7 +25,7 @@ export default {
 </script>
 
 <style lang=less>
-@import '../less/var';
+@import '../../style/base/var';
 #sider {
   position: absolute;
   bottom: 0;

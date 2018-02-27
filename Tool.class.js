@@ -26,7 +26,7 @@ module.exports = class Tool {
   // 文件相关任务失败处理
   static dieif (err, errDir, line) {
     if (err) {
-      Tool.error('文件名:' + path.basename(errDir))
+      Tool.error('文件名:' + errDir)
       Tool.error('行数:' + line)
       throw Error(err)
     }
@@ -60,16 +60,18 @@ module.exports = class Tool {
   static capitalize (str) {
     return str[0].toUpperCase() + str.slice(1)
   }
-  // 判断不存在则创建目录
-  static createDir (dirname, callback) {
+  // 创建(覆写)目录
+  static createDir (dirname, cb) {
     const dir = this.find(path.join('src', dirname))
     fs.access(dir, err => {
       if (err) {
         fs.mkdir(dir, err => {
           this.dieif(err, __filename, __line)
-          callback(dir)
+          cb(dir)
           this.success(`写入${dirname}成功！`)
         })
+      } else {
+        cb(dir)
       }
     })
   }
@@ -96,11 +98,14 @@ module.exports = class Tool {
             })
           } else {
             fs.access(childTo, err => {
-              if (!err) return
-              fs.mkdir(childTo, err => {
-                this.dieif(err, __filename, __line)
+              if (err) {
+                fs.mkdir(childTo, err => {
+                  this.dieif(err, __filename, __line)
+                  this.copyDir(childFrom, childTo)
+                })
+              } else {
                 this.copyDir(childFrom, childTo)
-              })
+              }
             })
           }
         })

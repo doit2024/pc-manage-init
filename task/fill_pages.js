@@ -7,16 +7,11 @@ module.exports = dir => {
   require('./create_sider')(dir, () => {
     Object.keys(ROUTES).forEach(first => {
       // 创建一级目录 (login|home|modal|...])
-      let groupFirst = path.join(dir, first)
-      fs.mkdir(groupFirst, err => {
-        Tool.dieif(err)
-        // 填充 {first}/*.vue
+      Tool.createDir(path.join('pages', first), groupFirst => {
         Tool.copyDir(path.join(__dirname, '../lib', first), groupFirst)
         ROUTES[first].forEach((second, index) => {
           // 创建二级目录
-          let groupSecond = path.join(groupFirst, `${index}_${second[0]}`)
-          fs.mkdir(groupSecond, err => {
-            Tool.dieif(err, __filename, __line)
+          Tool.createDir(path.join('pages', first, `${index}_${second[0]}`), groupSecond => {
             // 创建二级目录下的文件
             second.forEach(page => {
               let tablePage = TABLE_PAGES[page]
@@ -81,10 +76,10 @@ function _handleColumns (filter) {
   columns.forEach(item => {
     let [key, title] = item.split(':')
     switch (key) {
-      case 'selection': tpl += `${pre}this.$commonColumns.selection`; break
-      case '_index': tpl += `${tpl ? ',' : ''}${pre}this.$commonColumns.orderIndex`; break
-      case 'ctime': tpl += `${tpl ? ',' : ''}${pre}this.$commonColumns.ctime`; break
-      case 'atime': tpl += `${tpl ? ',' : ''}${pre}this.$commonColumns.atime`; break
+      case 'selection': tpl += `${pre}this.$cc.selection`; break
+      case '_index': tpl += `${tpl ? ',' : ''}${pre}this.$cc.orderIndex`; break
+      case 'ctime': tpl += `${tpl ? ',' : ''}${pre}this.$cc.ctime`; break
+      case 'atime': tpl += `${tpl ? ',' : ''}${pre}this.$cc.atime`; break
       case 'action':
       let actions = title.split('|')
       tpl += `,
@@ -96,17 +91,17 @@ function _handleColumns (filter) {
           }, [
             ${actions.map(act => {
               switch (act) {
-                case 'download': return `this.$commonColumns.hDownload(h, params)`
-                case 'detail': return `this.$commonColumns.hDetail(h, params, {'router|modal': '---'})`
-                case 'edit': return `this.$commonColumns.hEdit(h, params, {'router|modal': '---'})`
-                case 'del': return `this.$commonColumns.hDel(h, params, {api: '${filter.api}'})`
+                case 'download': return `this.$cc.hDownload(h, params)`
+                case 'detail': return `this.$cc.hDetail(h, params, {'router|modal': '---'})`
+                case 'edit': return `this.$cc.hEdit(h, params, {'router|modal': '---'})`
+                case 'del': return `this.$cc.hDel(h, params, {api: '${filter.api}'})`
               }
             }).join(',\n            ')}
           ])
         }`
       break
       default:
-        tpl += `${tpl ? ', ' : ''}
+        tpl += `${tpl ? ',' : ''}
         {
           title: '${title}',
           key: '${key}'
