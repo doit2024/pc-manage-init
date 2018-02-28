@@ -21,7 +21,14 @@ export default {
     }),
     logout: () => ajax({url: 'account/logout', whereCatch: 'local'}),
     info: () => ajax({url: 'account/info', whereCatch: 'local'}),
-    setting: data => ajax({url: 'account/setting', data})
+    setting: data => ajax({url: 'account/setting',
+      data: {
+        ...data,
+        old_pwd: data.old_pwd && aes.encrypt(data.old_pwd),
+        new_pwd: data.old_pwd && aes.encrypt(data.new_pwd),
+        repwd: data.old_pwd && aes.encrypt(data.repwd)
+      }
+    })
   },
 `
 let mockContent = `
