@@ -40,10 +40,11 @@
 > cnpm i -S iview babel-polyfill vuex
 > ```
 >
-> **7 _ 添加脚本命令：在package.json->scripts中加入（注意加密系统，自行处理）：**
+> **7 _ 添加脚本命令：在package.json->scripts中加入**
+> **（注意加密系统:rename package.json packjso）：**
 > * "com": "auto_regist_components",
 > * "api": "create_ajax_from_doc",
-> * "init": "pc-manage-init",
+> * "init": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
 >
 > **8 _ 生成php目录**
 > ```
@@ -52,8 +53,6 @@
 >
 > **9 _ 处理php目录**
 > * project.js  ---  项目整体信息配置
-> * index.php  ---  API 文档
-> * apidoc.json --- 文档头
 > * apidoc.js   --- copy API 文档, 避免加密
 >
 > **10 _ 组件注册**
@@ -73,6 +72,8 @@
 > 可以在 package.json中手动加上依赖, 例：
 > * "less": "^2.7.3",
 > * "less-loader": "^2.2.3",
-
+>
 > 2. eslint: Parsing error: x-invalid-end-tag
-> .eslintrc.js 的 rules 加上： "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]
+> .eslintrc.js 的 rules 加上 (脚本已自动加上):
+> * "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]
+>
