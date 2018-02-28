@@ -12,6 +12,8 @@ const eslintignoreList = [
 
 require('../task/add_configfile')(() => {
   require('../task/confirm_init')(() => {
+    require('../task/add_eslint_rule')()
+
     Tool.success('开始初始化!')
     Tool.addTo(Tool.find('.eslintignore'), eslintignoreList)
 

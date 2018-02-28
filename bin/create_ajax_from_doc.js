@@ -19,7 +19,9 @@ export default {
       },
       whereCatch: 'local'
     }),
-    logout: () => ajax({url: 'account/logout', whereCatch: 'local'})
+    logout: () => ajax({url: 'account/logout', whereCatch: 'local'}),
+    info: () => ajax({url: 'account/info', whereCatch: 'local'}),
+    setting: data => ajax({url: 'account/setting', data})
   },
 `
 let mockContent = `
@@ -39,7 +41,8 @@ fs.access(target, (err) => {
       let cnInfo = $api[2]
       let mock = item.replace(/\*.*/g, '').trim()
       let [module, action] = path.split('/')
-      allApi[module] = {}
+      if (module === 'account') return
+      allApi[module] = allApi[module] || {}
       allApi[module][action] = `data => ajax({url: '${path}', data})`
       index && (mockContent += `${index === 1 ? '' : '\n'}// '${cnInfo}':
       '/local/${path}':

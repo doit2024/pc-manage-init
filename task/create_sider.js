@@ -42,4 +42,3 @@ function _filterSiderPage (tpl) {
   }).join('')
   return tpl.replace('{{$content}}', content).replace('{{$openNames}}', openNames)
 }
-

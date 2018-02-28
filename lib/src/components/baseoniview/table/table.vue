@@ -70,11 +70,10 @@ export default {
     update () {
       this.loading = true
       this.selections = ''
-      this.$http[this.api].getList(this.keys).then(data => {
+      this.$http[this.api].lists(this.keys).then(data => {
         data.domain && data.list.map(item => { item.image = data.domain + item.image })
         if (data.list.length === 0 && this.keys.page > 1) {
-          this.keys.page--
-          return
+          return this.keys.page--
         }
         setTimeout(() => {
           this.loading = false

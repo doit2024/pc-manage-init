@@ -58,8 +58,8 @@ export default {
     submit () {
       this.$refs['form'].validate(valid => {
         if (!valid) return
-        // this.doLogin()
-        this.$router.replace('./home')
+        this.doLogin()
+        // this.$router.replace('./home')
       })
     },
     doLogin () {
@@ -92,6 +92,8 @@ export default {
   justify-content: center;
   height: 100%;
   min-height: 600px;
+  position: relative;
+  z-index: 1;
   &_box {
     width: 400px;
     background-color: #fff;

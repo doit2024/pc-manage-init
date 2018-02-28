@@ -68,7 +68,6 @@ module.exports = class Tool {
         fs.mkdir(dir, err => {
           this.dieif(err, __filename, __line)
           cb(dir)
-          this.success(`写入${dirname}成功！`)
         })
       } else {
         cb(dir)

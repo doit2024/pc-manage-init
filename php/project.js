@@ -3,6 +3,10 @@ module.exports = {
   PORT: 8022,
   HOST: 'http://120.24.55.58',
   AES_KEY: '267a4733f3d89127bac20be290742c81',
+  ADMIN: {
+    username: '13751198387',
+    password: '123456'
+  },
 
   // 挂在localStorage|sessionStorage下面的属性
   // 同服务器下多客户端则为赋不同值，防止串数据
@@ -51,7 +55,7 @@ module.exports = {
     'user': {
       api: 'user',
       title: '用户列表',
-      slots: [],
+      slots: ['new:注册用户'],
       columns: [
         '_index:序号',
         'nickname:昵称',
@@ -63,7 +67,7 @@ module.exports = {
     'device': {
       api: 'device',
       title: '设备列表',
-      slots: ['del:批量删除', 'new:注册设备'],
+      slots: ['del:批量删除', 'import:导入'],
       selectIdName: 'device_id',
       columns: [
         'selection',

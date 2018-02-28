@@ -20,6 +20,9 @@ module.exports = dir => {
                 let tpl = _filterTablePage(res.toString(), tablePage)
                 fs.writeFile(path.join(groupSecond, `${page}.vue`), tpl, err => {
                   Tool.dieif(err, __filename, __line)
+                  if (page === 'signup') {
+                    Tool.copyFile(path.join(__dirname, '../lib/page/signup.tpl'), path.join(groupSecond, `signup.vue`))
+                  }
                 })
               })
             })
@@ -54,12 +57,15 @@ function _handleSlots (filter) {
       let aItem = item.split(':')
       switch (aItem[0]) {
         case 'new':
-          tpl += `${tpl ? '' : '\n'}${isWrapTemplate ? '      ' : '    '}<DtBtnNew api="${filter.api}">${aItem[1]}</DtBtnNew>\n`
+          tpl += `${tpl ? '' : '\n'}${isWrapTemplate ? '      ' : '    '}<DtBtnNew name="${filter.api}">${aItem[1]}</DtBtnNew>\n`
           break
         case 'del':
           isWrapTemplate = true
           tpl = `\n    <template slot-scope="props">${tpl}`
           tpl += `\n      <DtBtnDel api="${filter.api}" :target="props.target">${aItem[1]}</DtBtnDel>\n`
+          break
+        case 'import':
+          tpl += `${tpl ? '' : '\n'}${isWrapTemplate ? '      ' : '    '}<DtBtnImport name="${filter.api}">${aItem[1]}</DtBtnImport>\n`
           break
         default:
           Tool.error('not config:' + aItem[0])

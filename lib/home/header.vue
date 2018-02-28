@@ -6,12 +6,12 @@
     </div>
     <h1  class="header_title ellipsis">XXXX后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
-      <img v-if="userInfo.avatar" :src="userInfo.avatar">
-      <!-- <img v-else src="../assets/avatar_default.png"> -->
-      <span>{{ userInfo.fullname }}</span>
+      <img class="avatar" v-if="userinfo.image" :src="userInfo.image">
+      <img class="avatar" v-else src="../../assets/user_default.png">
+      <span style="padding: 0 10px;">{{ userinfo.fullname }}</span>
       <Icon type="arrow-down-b" :class="{'dropdown-tran': visible}"></Icon>
       <DropdownMenu slot="list">
-        <li class="ivu-dropdown-item" @click="$store.dispatch('showModal', {name: 'user-edit'})">账号信息</li>
+        <li class="ivu-dropdown-item" @click="$store.dispatch('modal', {show: 'account'})">账号信息</li>
         <li class="ivu-dropdown-item" @click="quit">退出</li>
       </DropdownMenu>
     </Dropdown>
@@ -19,19 +19,18 @@
 </template>
 
 <script>
-import { ACCESS_TOKEN } from '@/../php/project'
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
-    visible: false,
-    userInfo: {
-      avatar: '',
-      fullname: 'summer'
-    }
+    // userInfo: {
+    //   avatar: '',
+    //   fullname: 'summer'
+    // },
+    visible: false
   }),
-  // computed: {
-  //   ...mapGetters(['userInfo'])
-  // },
+  computed: {
+    ...mapGetters(['userinfo'])
+  },
   methods: {
     onVisibleChange (v) {
       this.visible = v
@@ -42,17 +41,17 @@ export default {
         content: '确定要退出吗？',
         onOk: () => {
           this.$http.account.logout().then(res => {
-            this.$utils.removeStore(ACCESS_TOKEN)
-            this.$utils.removsStore('routerPath')
-            this.$store.dispatch('quit')
-            this.$router.replace('/login')
+            this.handleQuit()
           }).catch(e => {
-            this.$utils.removeStore(ACCESS_TOKEN)
-            this.$store.dispatch('quit')
-            this.$router.replace('/login')
+            this.handleQuit()
           })
         }
       })
+    },
+    handleQuit () {
+      window.localStorage.clear()
+      this.$store.dispatch('quit')
+      this.$router.replace('/login')
     }
   }
 }
@@ -87,6 +86,13 @@ export default {
         }
       }
     }
+  }
+  .avatar {
+    width: 40px;
+  }
+  .ivu-dropdown-rel {
+    display: flex;
+    align-items: center;
   }
 }
 </style>
