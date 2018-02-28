@@ -42,9 +42,10 @@
 >
 > **7 _ 添加脚本命令：在package.json->scripts中加入**
 > **（注意加密系统:rename package.json packjso）：**
+> * "init": "pc-manage-init",
 > * "com": "auto_regist_components",
 > * "api": "create_ajax_from_doc",
-> * "init": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
+> * "all": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
 >
 > **8 _ 生成php目录**
 > ```
