@@ -10,12 +10,18 @@
 >
 > **1 _ npm操作**
 > ```
-> 1-源使用国内淘宝镜像      : $ npm install -g cnpm --registry=https://registry.npm.taobao.org
-> 2-全局安装vue官方脚手架   : $ cnpm i vue-cli -g
+> 1-源使用国内淘宝镜像      : $ npm install -g cnpm --registry=https://registry.npm.taobao.org
+>
+> 2-全局安装vue官方脚手架   : $ cnpm i vue-cli -g
+>
 > 3-使用脚手架初始化项目    : $ vue-init webpack myPojectName
+>
 > 4-安装vue-cli依赖        : $ cd myPojectName && cnpm i
+>
 > 5-安装本插件             : $ cnpm i -D pc-manage-init
-> 6-安装开发环境依赖'       : $ cnpm i -D less less-loader (跳过，见坑1)
+>
+> 6-安装开发环境依赖        : $ cnpm i -D less less-loader (跳过，见坑1)
+>
 > 7-安装生产环境依赖        : $ cnpm i -S iview babel-polyfill vuex highcharts
 >
 > ```
