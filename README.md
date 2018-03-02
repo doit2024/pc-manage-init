@@ -123,14 +123,14 @@
 
 > * 账号信息
 > ```
-> 登录       ： account/login
-> 登出       ： account/logout
+> 登录      ： account/login
+> 登出      ： account/logout
 > 账号信息   ： account/info
 > 账号设置   ： account/setting
 > ```
 > * 列表页面
 > ```
-> 列表     ： api/lists
+> 列表      ： api/lists
 > 增       ： api/add
 > 删       ： api/del
 > 改       ： api/edit
