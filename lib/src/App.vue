@@ -13,10 +13,10 @@ export default {
 </script>
 
 <style lang=less>
-  @import './style/base/reset';
-  @import './style/base/atom';
-  @import './style/base/anim';
-  @import './style/base/media';
-  @import './style/base/scrollbar';
+  @import './style/reset';
+  @import './style/atom';
+  @import './style/anim';
+  @import './style/media';
+  @import './style/scrollbar';
   @import './style/common';
 </style>

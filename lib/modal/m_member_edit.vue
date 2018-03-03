@@ -1,14 +1,20 @@
 <template>
   <div>
     <Form ref="form" :rules="rules" :model="formData" label-position="left" :label-width="80">
-      <FormItem label="账号名">
-        <span>{{formData.username}}</span>
+      <FormItem prop="username" label="账号名">
+        <Input v-model.trim="formData.username" :maxlength="$ml.username" placeholder="请输入用户姓名"></Input>
       </FormItem>
       <FormItem prop="fullname" label="姓名">
-        <Input v-model.trim="formData.fullname" :maxlength="$ml.name" placeholder="请输入用户姓名"></Input>
+        <Input v-model.trim="formData.fullname" :maxlength="$ml.username" placeholder="请输入用户姓名"></Input>
       </FormItem>
       <FormItem label="头像">
         <DtUploadImage v-model="formData.image"/>
+      </FormItem>
+      <FormItem label="角色">
+        <DtSelect name="roleType" :from="1" v-model="formData.role_id"/>
+      </FormItem>
+      <FormItem prop="privileges_id" label="权限">
+        <DtCheckboxPrivilege v-model="formData.privileges_id"/>
       </FormItem>
       <FormItem label="密码">
         <span class="value mr-30">************</span>
@@ -18,22 +24,19 @@
       </FormItem>
     </Form>
     <Form v-if="isUpdatePassword" ref="formPassword" :rules="rulesPassword" :model="password" label-position="left" :label-width="80">
-      <FormItem prop="old_pwd">
-        <Input v-model="password.old_pwd" :maxlength="$ml.password" placeholder="请输入原密码"></Input>
-      </FormItem>
-      <FormItem prop="new_pwd">
-        <Input v-model="password.new_pwd" :maxlength="$ml.password" placeholder="请输入新密码"></Input>
+      <FormItem prop="pwd">
+        <Input v-model="password.pwd" :maxlength="$ml.password" placeholder="输入密码"></Input>
       </FormItem>
       <FormItem prop="repwd">
-        <Input v-model="password.repwd" :maxlength="$ml.password" placeholder="请再次输入新密码"></Input>
+        <Input v-model="password.repwd" :maxlength="$ml.password" placeholder="确认密码"></Input>
       </FormItem>
     </Form>
   </div>
 </template>
 
 <script>
+import bus from '@/bus'
 import mixin from './mixin'
-import { mapGetters } from 'vuex'
 export default {
   mixins: [mixin],
   props: ['modal'],
@@ -42,45 +45,56 @@ export default {
     formData: {
       username: '',
       fullname: '',
-      image: ''
+      image: '',
+      role_id: '2',
+      privileges_id: []
     },
     password: {
-      old_pwd: '',
-      new_pwd: '',
+      pwd: '',
       repwd: ''
     }
   }),
   computed: {
-    ...mapGetters(['userinfo']),
+    detail () {
+      return this.modal.detail
+    },
     rules () {
       return {
-        fullname: this.$v.aRequireText
+        username: this.$v.aRequireText,
+        fullname: this.$v.aRequireText,
+        privileges_id: this.$v.aCheckbox
       }
     },
     rulesPassword () {
       const p = this.$v.aPassword
       return {
-        old_pwd: p,
-        new_pwd: p,
+        pwd: p,
         repwd: p
       }
     }
   },
   mounted () {
-    this.formData = {...this.userinfo}
+    let pi = this.detail.privileges_id
+    let image = this.detail.image
+    this.formData = {
+      ...this.detail,
+      privileges_id: pi ? pi.split(',') : [],
+      image: /\w+\/$/.test(image) ? '' : image
+    }
   },
   methods: {
     submit () {
+      const data = {...this.formData, privileges_id: this.formData.privileges_id.join(',')}
       this.isUpdatePassword
-        ? this.handlePasswordChange({...this.formData, ...this.password})
-        : this.handlePasswordNotChange({...this.formData})
+        ? this.handlePasswordChange({...data, ...this.password})
+        : this.handlePasswordNotChange(data)
     },
     handlePasswordNotChange (data) {
       this.$refs['form'].validate(valid => {
         if (!valid) return
-        this.$http.account.setting(data).then(data => {
+        this.$http.member.edit(data).then(data => {
           this.$Message.success('保存成功')
-          this.$store.dispatch('update', {key: 'userinfo', value: this.formData})
+          bus.$emit('update')
           this.close()
         })
       })
@@ -90,9 +104,9 @@ export default {
         if (!valid) return
         this.$refs['formPassword'].validate(valid => {
           if (!valid) return
-          this.$http.account.setting(data).then(data => {
-            this.$Message.success('保存成功, 密码已更改，请重新登录！')
-            this.$router.push('/login')
+          this.$http.member.edit(data).then(data => {
+            this.$Message.success('保存成功！')
+            bus.$emit('update')
             this.close()
           })
         })

@@ -1,14 +1,16 @@
 <template>
   <Header id="header">
     <div class="header_logo" @mouseenter="$store.dispatch('showSider', true)" @mouseleave="$store.dispatch('showSider', false)">
-      <img class="logo" src="../../assets/logo.png" alt="">
+      <div class="logo">
+        <img src="../../assets/logo1.png" alt="">
+      </div>
       <Icon class="icon" type="navicon-round"></Icon>
     </div>
-    <h1  class="header_title ellipsis">XXXX后台管理系统</h1>
+    <h1 class="header_title ellipsis">女娲机器人后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
-      <img class="avatar" v-if="userinfo.image" :src="userInfo.image">
-      <img class="avatar" v-else src="../../assets/user_default.png">
-      <span style="padding: 0 10px;">{{ userinfo.fullname }}</span>
+      <Avatar v-if="userinfo.image" :src="userinfo.image" />
+      <Avatar v-else :src="userDefault" />
+      <span>{{ userinfo.fullname }}</span>
       <Icon type="arrow-down-b" :class="{'dropdown-tran': visible}"></Icon>
       <DropdownMenu slot="list">
         <li class="ivu-dropdown-item" @click="$store.dispatch('modal', {show: 'account'})">账号信息</li>
@@ -29,7 +31,10 @@ export default {
     visible: false
   }),
   computed: {
-    ...mapGetters(['userinfo'])
+    ...mapGetters(['userinfo']),
+    userDefault () {
+      return require('../../assets/user_default.png')
+    }
   },
   methods: {
     onVisibleChange (v) {
@@ -49,7 +54,6 @@ export default {
       })
     },
     handleQuit () {
-      window.localStorage.clear()
       this.$store.dispatch('quit')
       this.$router.replace('/login')
     }
@@ -58,19 +62,30 @@ export default {
 </script>
 
 <style lang=less>
-@import '../../style/base/var';
+@import '../../style/var';
 #header {
   display: flex;
   justify-content: space-between;
   background-color: #fff;
   opacity: .9;
   box-shadow: 0 1px 3px #eee;
+  &.ivu-layout-header {
+    padding-left: 0;
+  }
   z-index: 1;
   .header {
     &_logo {
       height: 100%;
       img { height: 100%; }
-      .icon { font-size: 20px; }
+      .logo {
+        width: @sidebar-width;
+        justify-content: center;
+        background: linear-gradient(#03da57, #009b88);
+      }
+      .icon {
+        font-size: 20px;
+        padding: 0 90px;
+      }
     }
     &_title {
       font-size: 20px;
@@ -86,13 +101,6 @@ export default {
         }
       }
     }
-  }
-  .avatar {
-    width: 40px;
-  }
-  .ivu-dropdown-rel {
-    display: flex;
-    align-items: center;
   }
 }
 </style>

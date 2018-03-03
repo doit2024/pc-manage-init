@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang=less>
-@import '../../style/base/var';
+@import '../../style/var';
 #sider {
   position: absolute;
   bottom: 0;

@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang=less>
-@import '../../style/base/var';
+@import '../../style/var';
 #home {
   display: flex;
   flex-direction: column;

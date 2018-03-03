@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang=less>
-@import '../../style/base/var';
+@import '../../style/var';
 .modal {
   position: fixed;
   z-index: 109;

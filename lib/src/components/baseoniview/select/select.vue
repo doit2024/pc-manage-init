@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { OPTIONS } from '@/global/cons'
+import { OPTIONS } from '@/global'
 export default {
   props: {
     value: String,

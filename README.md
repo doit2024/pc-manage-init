@@ -44,11 +44,17 @@
 >
 > **3 _ 执行脚本**
 > ```
+>
 > 1-生成php目录               : $ npm run init
+>
 > 2-处理php目录 （见配置说明）
+>
 > 3-生成项目                  : $ npm run all
+>
 > 4-组件注册                  : $ npm run com
+>
 > 5-根据apidoc更新src/ajax    : $ npm run api
+>
 > ```
 
 
@@ -137,3 +143,33 @@
 > 查       ： api/detail
 > ```
 
+## 目录详情
+
+### 1 _ @/ajax:
+> * 结构
+>
+ | 文件名    | 内容
+ | --------  | :-----
+ | core.js   | 基于promise原生封装的ajax;请求与响应拦截均在此处理
+ | index.js  | API封装导出， 调用: this.$http.api.action(formData<object>).then(data => {handle(data)})
+ | mock.js   | 键名为API则启用mock数据,否则关闭（仅在开发环境下）
+> * @/ajax/core.js
+> * 错误捕获规则（options.whereCatch）
+>
+ | 值<string> | 含义
+ | --------   | :-----
+ | local      | 本地catch, 针对需要特殊处理的错误， ajax.js不做处理
+ | ajax       | 默认，ajax.js 统一捕获处理，后台返回错误直接弹框，本地catch无作用
+ | both       | 本地catch + ajax.js统一处理
+>
+### 2 _ @/components:
+> * 结构
+>
+ | 目录名称       | 内容
+ | --------       | :-----
+ | layout         | 页面布局
+ | base           | 无依赖组件
+ | baseoniview    | 基于iview二次封装
+ | charts         | 图表类
+ | localui        | 按钮/输入框...
+ | structure      | 页面结构整合

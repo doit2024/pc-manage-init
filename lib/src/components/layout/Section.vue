@@ -31,7 +31,7 @@ export default {
   .content {
     padding: 20px;
     background-color: #fff;
-    box-shadow: 1px 3px 3px #eee, -1px 3px 3px #eee;
+    box-shadow: 0px 0px 40px 6px #eee;
     border-radius: 6px;
     overflow: hidden;
   }
