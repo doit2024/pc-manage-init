@@ -2,11 +2,11 @@
   <Header id="header">
     <div class="header_logo" @mouseenter="$store.dispatch('showSider', true)" @mouseleave="$store.dispatch('showSider', false)">
       <div class="logo">
-        <img src="../../assets/logo1.png" alt="">
+        <img class="logo-img" src="../../assets/logo.png" alt="">
       </div>
       <Icon class="icon" type="navicon-round"></Icon>
     </div>
-    <h1 class="header_title ellipsis">女娲机器人后台管理系统</h1>
+    <h1 class="header_title ellipsis">XXXXX后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
       <Avatar v-if="userinfo.image" :src="userinfo.image" />
       <Avatar v-else :src="userDefault" />
@@ -80,7 +80,11 @@ export default {
       .logo {
         width: @sidebar-width;
         justify-content: center;
-        background: linear-gradient(#03da57, #009b88);
+        align-items: center;
+        &-img {
+          max-width: @sidebar-width;
+          max-height: @header-height;
+        }
       }
       .icon {
         font-size: 20px;
