@@ -3,10 +3,10 @@ module.exports = {
   PORT: 8022,
   HOST: 'http://120.24.55.58',
   AES_KEY: '267a4733f3d89127bac20be290742c81',
-  ADMIN: {
-    username: '13751198387',
-    password: '123456'
-  },
+  ADMIN: `{
+      username: '13751198387',
+      password: '123456'
+    }`,
 
   // 挂在localStorage|sessionStorage下面的属性
   // 同服务器下多客户端则为赋不同值，防止串数据

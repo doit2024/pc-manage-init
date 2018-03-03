@@ -6,10 +6,7 @@ let env = process.env.NODE_ENV
 
 switch (env) {
   case 'development':
-    window.localStorage.setItem(USER_INFO, aes.encrypt(JSON.stringify({
-      username: '13751198387',
-      password: '123456'
-    })))
+    window.localStorage.setItem(USER_INFO, aes.encrypt(JSON.stringify({{$admin}})))
     baseUrl = '/local/'
     break
   case 'production':

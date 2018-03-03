@@ -137,4 +137,33 @@ module.exports = class Tool {
       }
     })
   }
+  static readFile (path) {
+    return new Promise((resolve, reject) => {
+      fs.readFile(path, (err, res) => {
+        Tool.dieif(err, 'Tool.readFile')
+        resolve(res.toString())
+      })
+    })
+  }
+  static writeFile (path, content) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(path, content, err => {
+        Tool.dieif(err, __filename, __line)
+      })
+    })
+  }
+  static getDir (dir) {
+    return new Promise((resolve, reject) => {
+      fs.access(dir, err => {
+        if (err) {
+          fs.mkdir(dir, err => {
+            Tool.dieif(err, __filename, __line)
+            resolve(dir)
+          })
+        } else {
+          resolve(dir)
+        }
+      })
+    })
+  }
 }

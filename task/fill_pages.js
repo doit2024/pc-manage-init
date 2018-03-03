@@ -17,7 +17,7 @@ module.exports = dir => {
               let tablePage = TABLE_PAGES[page]
               fs.readFile(path.join(__dirname, `../lib/page/${tablePage ? 'table' : 'simple'}.tpl`), (err, res) => {
                 Tool.dieif(err, __filename, __line)
-                let tpl = _filterTablePage(res.toString(), tablePage)
+                let tpl = _filterTablePage(res.toString(), tablePage, page)
                 fs.writeFile(path.join(groupSecond, `${page}.vue`), tpl, err => {
                   Tool.dieif(err, __filename, __line)
                   if (page === 'signup') {
@@ -33,8 +33,9 @@ module.exports = dir => {
   })
 }
 
-function _filterTablePage (tpl, filter) {
+function _filterTablePage (tpl, filter, page) {
   if (filter) {
+    // table页面
     tpl = tpl.replace(/\{\{\$(\w+)\}\}/g, (a, b, c) => {
       let tmp = filter[b]
       switch (b) {
@@ -44,6 +45,10 @@ function _filterTablePage (tpl, filter) {
       }
       return tmp
     })
+  } else {
+    // 其他页面
+    console.log()
+    tpl = tpl.replace(/\{\{\$page\}\}/, page)
   }
   return tpl
 }

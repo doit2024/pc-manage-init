@@ -20,7 +20,7 @@ require('../task/add_configfile')(() => {
     Tool.success('填充src目录!')
     Tool.copyDir(path.join(__dirname, '../lib/src'), Tool.find('src'))
 
-    Tool.taskFill(['pages', 'router'])
+    Tool.taskFill(['env', 'pages', 'router'])
 
     require('../task/set_proxy')()
   })
