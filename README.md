@@ -1,4 +1,3 @@
-# 说明书
 
 ## 项目依赖
 > vue-cli vue-router iview babel-polyfill vuex less highcharts
@@ -28,17 +27,21 @@
 >
 > **2 _ 处理 package.json**
 > * 注意加密系统 : $ rename package.json package.jso
-> > 添加脚本命令: scripts中加入
+> > 添加脚本命令 && 手动添加less依赖
 > > ```
-> > "init": "pc-manage-init",
-> > "com": "auto_regist_components",
-> > "api": "create_ajax_from_doc",
-> > "all": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
-> > ```
-> > 手动添加依赖: devDependencies中加入
-> > ```
-> > "less": "^2.7.3",
-> > "less-loader": "^2.2.3",
+> > {
+> >   "scripts": {
+> >     "init": "pc-manage-init",
+> >     "com": "auto_regist_components",
+> >     "api": "create_ajax_from_doc",
+> >     "all": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
+> >   },
+> >   "devDependencies": {
+> >     "less": "^2.7.3",
+> >     "less-loader": "^2.2.3",
+> >   }
+> > }
+> >
 > > ```
 > * 注意加密系统 : $ rename package.jso package.json
 >
