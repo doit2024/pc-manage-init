@@ -17,6 +17,7 @@ module.exports = () => {
         }
       }
     },`)
+      .replace(/(target: 'https?:\/\/[\.\d]+:)\d+(\/index.php\/')/, `$1${PORT}$2`)
       .replace(/(port:\s?)\d+/, `$1${PORT}`)
       // .replace(/(assetsPublicPath: ')(\/')/, '$1.$2')
     fs.writeFile(target, data, err => {
