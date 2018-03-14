@@ -170,9 +170,6 @@
 >
  | 目录名称       | 内容
  | --------       | :-----
- | layout         | 页面布局
- | base           | 无依赖组件
- | baseoniview    | 基于iview二次封装
- | charts         | 图表类
- | localui        | 按钮/输入框...
- | structure      | 页面结构整合
+ | container      | 容器组件
+ | form           | 表单相关
+ | ui             | 数据展示

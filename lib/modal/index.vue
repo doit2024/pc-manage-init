@@ -25,6 +25,11 @@
 import bus from '@/bus'
 import { mapGetters } from 'vuex'
 import { map, modals } from './config.js'
+import mixin from './amixin'
+// 为每个modal注入mixin
+Object.values(modals).forEach(modal => {
+  modal.mixins = [mixin]
+})
 export default {
   computed: {
     ...mapGetters(['modal']),

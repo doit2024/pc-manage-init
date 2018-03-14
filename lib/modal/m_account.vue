@@ -32,10 +32,8 @@
 </template>
 
 <script>
-import mixin from './mixin'
 import { mapGetters } from 'vuex'
 export default {
-  mixins: [mixin],
   props: ['modal'],
   data: () => ({
     isUpdatePassword: false,

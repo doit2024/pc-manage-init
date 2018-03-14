@@ -17,9 +17,7 @@
 
 <script>
 import bus from '@/bus'
-import mixin from './mixin'
 export default {
-  mixins: [mixin],
   props: ['modal'],
   data: () => ({
     formData: {
