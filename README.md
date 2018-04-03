@@ -5,7 +5,7 @@
 ## 使用说明
 
 > **0 _ 安装**
-> * nodejs > v8.0.0
+> * nodejs ^v8.*
 >
 > **1 _ npm操作**
 > ```
@@ -26,24 +26,22 @@
 > ```
 >
 > **2 _ 处理 package.json**
-> * 注意加密系统 : $ rename package.json package.jso
-> > 添加脚本命令 && 手动添加less依赖
-> > ```
-> > {
-> >   "scripts": {
-> >     "init": "pc-manage-init",
-> >     "com": "auto_regist_components",
-> >     "api": "create_ajax_from_doc",
-> >     "all": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
-> >   },
-> >   "devDependencies": {
-> >     "less": "^2.7.3",
-> >     "less-loader": "^2.2.3",
-> >   }
-> > }
-> >
-> > ```
-> * 注意加密系统 : $ rename package.jso package.json
+> 添加脚本命令 && 手动添加less依赖
+> ```
+> {
+>   "scripts": {
+>     "init": "pc-manage-init",
+>     "com": "auto_regist_components",
+>     "api": "create_ajax_from_doc",
+>     "all": "pc-manage-init && auto_regist_components && create_ajax_from_doc",
+>   },
+>   "devDependencies": {
+>     "less": "^2.7.3",
+>     "less-loader": "^2.2.3",
+>   }
+> }
+>
+> ```
 >
 > **3 _ 执行脚本**
 > ```
