@@ -22,7 +22,7 @@ function getComponents (startPath) {
       let st = fs.statSync(childPath)
       if (st.isFile()) {
         /\.vue$/.test(child) && components.push({
-          name: UP_PRE + Tool.capitalize(child).replace('.vue', ''),
+          name: PRE + Tool.capitalize(child).replace('.vue', ''),
           path: childPath.replace(/.+components(.+)\.vue/, '.$1').replace(/\\/g, '/')
         })
       } else {
