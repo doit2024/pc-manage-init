@@ -3,8 +3,7 @@
     "name": "nudazhuang"
   },
   "bin": {
-    "auto_regist_components": "./bin/auto_regist_components.js",
-    "create_ajax_from_doc": "./bin/create_ajax_from_doc.js",
+    "generate-api": "./bin/generate_api.js",
     "pc-manage-init": "./bin/pc_init.js"
   },
   "description": "manage system structure auto init..",
