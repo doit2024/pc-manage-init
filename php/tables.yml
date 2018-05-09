@@ -1,0 +1,31 @@
+# 表格
+# 名称为控制器名
+user:
+  api: user
+  title: 用户列表
+  slots:
+    - new:注册用户
+  columns:
+    - _index:序号
+    - nickname:昵称
+    - ctime:创建时间
+    - rtime:注册时间
+    - action:detail|edit|del
+
+device:
+  api: device
+  title: 设备列表
+  slots:
+    - del:批量删除
+    - import:导入
+  selectIdName: device_id
+  columns:
+    - selection
+    - _index:序号
+    - serial:序列号
+    - name:名称
+    - field1:字段1
+    - field2:字段2
+    - ctime:创建时间
+    - rtime:注册时间
+    - action:download|edit|del
