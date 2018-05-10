@@ -2,8 +2,9 @@
 
 const fs = require('fs')
 const path = require('path')
+const { INIT_DIR } = require('../config.js')
 
-const apiText = fs.readFileSync(path.join(process.cwd(), 'php', 'apidoc.js')).toString()
+const apiText = fs.readFileSync(path.join(process.cwd(), INIT_DIR, 'apidoc.js')).toString()
 const apiTextArr = apiText.split('/**')
 const apiArr = []
 while (apiTextArr.length) {
@@ -58,10 +59,14 @@ export default {
   },
 ` + JSON.stringify(allApi, null, 2).replace(/"/g, '').slice(1) + '\n'
 
-fs.writeFile(path.join(process.cwd(), 'src', 'ajax', 'index.js'), apiContent, e => {})
+fs.writeFile(path.join(process.cwd(), 'src', 'ajax', 'index.js'), apiContent, e => {
+  console.log('api done!')
+})
 
 let mockContent = `
 export default {
 ` + allMock
 
-fs.writeFile(path.join(process.cwd(), 'src', 'ajax', 'mock.js'), mockContent, e => {})
+fs.writeFile(path.join(process.cwd(), 'src', 'ajax', 'mock.js'), mockContent, e => {
+  console.log('mock done!')
+})
