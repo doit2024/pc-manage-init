@@ -44,7 +44,7 @@ $ npm i -D pc-manage-init
 }
 ```
 
- **3 _ 执行脚本**
+## start
  ```
 
  1-生成php目录               : $ npm run init
@@ -53,21 +53,14 @@ $ npm i -D pc-manage-init
 
  3-生成项目                  : $ npm run init
 
- 4-组件注册                  : $ npm run com
-
- 5-根据apidoc更新src/ajax    : $ npm run api
+ 4-根据apidoc更新src/ajax    : $ npm run api
 
  ```
 
 
 ## 可能出现的坑
 
- 1. 如果出现 less 相关问题，确认正确写法仍然报错，则可能是less 与 less-loader 版本不匹配导致，
- 可以在 package.json中手动加上依赖, 这里使用 iview@2.9.2 的依赖版本：
- * "less": "^2.7.3",
- * "less-loader": "^2.2.3",
-
- 2. eslint: Parsing error: x-invalid-end-tag
+ 1. eslint: Parsing error: x-invalid-end-tag
  .eslintrc.js 的 rules 加上 (脚本已自动加上):
  * "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]
 
@@ -77,24 +70,16 @@ $ npm i -D pc-manage-init
  *  拷贝 API文档(index.php)转成js , 避免加密
  2. project.js
  ```
- PRE: 'dt', -- 组件前缀
- PORT: 8022,
- HOST: 'http://120.24.55.58',
- AES_KEY: '267a4733f3d89127bac20be290742c81',
- ADMIN: {
-   username: '13751198387',
-   password: '123456'
- },
+ PRE: dt, -- 组件前缀
+ PORT: 8022
+ HOST: http://120.24.55.58
+ AES_KEY: 267a4733f3d89127bac20be290742c81
+ ADMIN:
+   username: 13751198387
+   password: 123456
  
- // 挂在localStorage|sessionStorage下面的属性
- // 同服务器下多客户端则为赋不同值，防止串数据
- ACCESS_TOKEN: 'DT_ACCESS_TOKEN',
- USER_INFO: 'DT_USER_INFO',
- LOGIN_INFO: 'DT_LOGIN_INFO',
- 
- // 路由表: 键或值不能重名
- ROUTES: {
-   // login: ['signup', 'signup', 'forget'],
+ ROUTES:
+   // login: ['signup', 'signup', 'forget']
    login: ['signup'],
    home: [
      String : 1级菜单， 无子菜单
@@ -150,7 +135,7 @@ $ npm i -D pc-manage-init
 ### 1 _ @/ajax:
  * 结构
 
- | 文件名    | 内容
+ | 文件名     | 内容
  | --------  | :-----
  | core.js   | 基于promise原生封装的ajax;请求与响应拦截均在此处理
  | index.js  | API封装导出， 调用: this.$http.api.action(formData<object).then(data = {handle(data)})
@@ -158,7 +143,7 @@ $ npm i -D pc-manage-init
  * @/ajax/core.js
  * 错误捕获规则（options.whereCatch）
 
- | 值<string | 含义
+ | 值<string> | 含义
  | --------   | :-----
  | local      | 本地catch, 针对需要特殊处理的错误， ajax.js不做处理
  | ajax       | 默认，ajax.js 统一捕获处理，后台返回错误直接弹框，本地catch无作用
@@ -167,7 +152,7 @@ $ npm i -D pc-manage-init
 ### 2 _ @/components:
  * 结构
 
- | 目录名称       | 内容
+ | 目录名称        | 内容
  | --------       | :-----
  | container      | 容器组件
  | form           | 表单相关
