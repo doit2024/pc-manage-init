@@ -1,5 +1,5 @@
 <template>
-  <Select :value="value" v-bind="$attrs" v-on="$listeners" :disabled="disabled" clearable>
+  <Select :value="value" v-bind="$attrs" v-on="$listeners" :disabled="!rst.length" clearable>
     <Option
       v-for="(item, i) in opts"
       :value="item.value"
@@ -22,26 +22,14 @@ export default {
     province: String,
     city: String
   },
-  data: () => ({
-    disabled: true
-  }),
   computed: {
     opts () {
       let rst = area
-      this.disabled = false
       if (['city', 'district'].includes(this.type)) {
-        if (this.province) {
-          rst = rst.filter(v => v.value === this.province)[0].children
-        } else {
-          this.disabled = true
-        }
+        rst = this.province ? rst.filter(v => v.value === this.province)[0].children : []
       }
-      if ('district' === this.type) {
-        if (this.city) {
-          rst = rst.filter(v => v.value === this.city)[0].children
-        } else {
-          this.disabled = true
-        }
+      if (this.type === 'district') {
+        rst = this.city ? rst.filter(v => v.value === this.city)[0].children : []
       }
       return rst
     }

@@ -6,7 +6,7 @@
     :before-upload="onBeforeUpload"
     :on-success="onSuccess"
     :on-remove="onRemove"
-    :action="`${baseUrl}/upload/upload_file`">
+    :action="`${BASE_URL}/upload/upload_file`">
       <div style="padding: 20px 0">
         <Icon type="ios-cloud-upload" size="52" style="color: #42B782"></Icon>
         <p>点击或拖拽到这里上传</p>
@@ -15,7 +15,8 @@
 </template>
 
 <script>
-import { baseUrl } from '@/config'
+import CONFIG from '@/config'
+const { BASE_URL } = CONFIG
 const names = {
   'apk': /\.apk$/i,
   'bin': /\.bin$/i,
@@ -25,7 +26,7 @@ const names = {
 export default {
   props: ['format'],
   computed: {
-    baseUrl: () => baseUrl,
+    BASE_URL: () => BASE_URL,
     innerFormat () {
       let fm = this.format
       return fm === 'excel' ? ['xls', 'xlsx', 'xlt', 'xlsm'] : [fm]

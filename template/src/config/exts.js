@@ -6,6 +6,7 @@ import Component from 'vue-auto-register'
 
 import apiGroup from '@/ajax'
 import * as validate from '@/global/validate'
+import maxlength from '@/global/maxlength'
 import { OPTIONS } from '@/global/cons'
 import { filterTimestamp } from '@/global/funs'
 import commonColumns from '@/global/columns'
@@ -23,7 +24,7 @@ Vue.use(Component)
 
 Object.assign(Vue.prototype, {
   $http: apiGroup,
-  $ml: validate.ml,
+  $ml: maxlength,
   $v: validate,
   $cc: commonColumns
 })

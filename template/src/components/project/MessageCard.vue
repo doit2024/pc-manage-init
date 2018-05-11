@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import HIO from '@/common/HIO';
-import { tip } from '@/common/utils';
 export default {
   props: {
     data: {
@@ -36,8 +34,8 @@ export default {
       this.$router.push({name: this.editRouterName, params: { id }})
     },
     async del () {
-      const rs = await HIO.post(this.delUrl, this.data);
-      tip(rs, '删除成功！', () => rs)
+      const res = this.$http[this.api].del(this.data)
+      res && alert('done!')
     }
   }
 }

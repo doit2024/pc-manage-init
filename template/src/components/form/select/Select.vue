@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import * as opts from './data'
+import { OPTIONS } from '@/global/cons'
 export default {
   props: {
     name: String,
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     opts () {
-      return opts[this.name]
+      return OPTIONS[this.name]
     }
   }
 }

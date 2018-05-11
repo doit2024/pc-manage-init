@@ -1,4 +1,4 @@
-import aes from '@/global/funs'
+import { aes } from '@/global/funs'
 const { encrypt, decrypt } = aes
 
 const ACCESS_TOKEN = 'DT_ACCESS_TOKEN'

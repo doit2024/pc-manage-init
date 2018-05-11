@@ -23,7 +23,7 @@ export default {
     }
   },
   methods: {
-    init(data) {
+    init (data) {
       data = data.map(v => ({city: v.city, value: ~~v.value}))
       $('https://data.jianshukeji.com/jsonp?filename=geochina/china.json', (err, mapData) => {
         if (err) return

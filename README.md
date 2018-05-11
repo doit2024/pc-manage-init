@@ -21,7 +21,7 @@
 $ vue-init webpack demo
 $ cd demo
 $ cnpm i
-$ cnpm i -S iview babel-polyfill vuex highcharts vue-auto-register
+$ cnpm i -S iview babel-polyfill vuex highcharts vue-auto-register jsonp
 $ cnpm i -D less less-loader
 ```
 

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import UploadOss from './uploadOss'
+import UploadOss from './UploadOss'
 export default {
   props: {
     value: {

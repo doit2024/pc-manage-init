@@ -7,6 +7,7 @@ user:
   title: 用户列表
   slots:
     - new:注册用户
+    - xpt:导出
   columns:
     - _index:序号
     - nickname:昵称
@@ -19,7 +20,7 @@ device:
   title: 设备列表
   slots:
     - del:批量删除
-    - import:导入
+    - ept:导入
   selectIdName: device_id
   columns:
     - selection

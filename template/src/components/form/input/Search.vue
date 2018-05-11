@@ -2,7 +2,7 @@
   <Input
     class="dt-search"
     :value="value"
-    icon="search" 
+    icon="search"
     v-bind="$attrs"
     @on-change="handleChange"
   />
@@ -20,11 +20,11 @@ export default {
   methods: {
     handleChange (e) {
       debounce(() => {
-        this.$emit('input', e.target.value);
+        this.$emit('input', e.target.value)
       }, 1000)
     }
   }
-};
+}
 </script>
 
 <style lang="less">

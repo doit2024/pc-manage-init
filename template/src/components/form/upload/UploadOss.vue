@@ -7,7 +7,8 @@
 
 <script>
 import { aes } from '@/global/funs'
-import { ossUrl } from '@/config'
+import CONFIG from '@/config'
+const { OSS_URL } = CONFIG
 export default {
   data: () => ({
     ossParams: {
@@ -46,14 +47,14 @@ export default {
           }
         }
       }
-      xhr.open('POST', ossUrl || this.ossParams.host, true)
+      xhr.open('POST', OSS_URL || this.ossParams.host, true)
       xhr.send(ossData)
     }
   }
 }
 </script>
 
-<style lang=scss>
+<style lang=less>
 @import '../../../style/var';
 .upload-btn {
   display: inline-flex;
@@ -69,10 +70,10 @@ export default {
     padding: 0;
   }
   &:hover {
-    color: $color-theme;
-    border-color: $color-theme;
+    color: @color-theme;
+    border-color: @color-theme;
     .icon{
-      color: $color-theme;
+      color: @color-theme;
     }
   }
   .icon {

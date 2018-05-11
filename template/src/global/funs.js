@@ -1,5 +1,6 @@
-import { AES_KEY } from '../../init/project'
+import CONFIG from '@/config'
 import GibberishAES from '@/plugins/gibberish-aes'
+const { AES_KEY } = CONFIG
 
 export const aes = {
   encrypt: item => GibberishAES.aesEncrypt(item, AES_KEY).trim(),

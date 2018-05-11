@@ -13,7 +13,7 @@ export default {
     },
     name: {
       type: String,
-      required: true      
+      required: true
     },
     data: {
       type: Array,

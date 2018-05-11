@@ -1,12 +1,12 @@
-import Highcharts from 'highcharts';
+import Highcharts from 'highcharts'
 
 export const credits = {
   href: 'http://www.dtston.com',
   text: 'dtston.com'
-};
+}
 
 export const setOptionsLine = oKeys => {
-  const { color, name, data } = oKeys;
+  const { color, name, data } = oKeys
   return {
     chart: {
       type: 'area',
@@ -92,4 +92,4 @@ export const setOptionsLine = oKeys => {
       color
     }]
   }
-};
+}

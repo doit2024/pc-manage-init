@@ -1,6 +1,6 @@
 <template>
-  <dtSection :title="title">
-    <div slot="header">
+  <DtSection :title="title">
+    <div slot="action">
       <slot :disabled="!tableData.list.length" :target="selections"></slot>
     </div>
     <Table
@@ -10,13 +10,14 @@
       :loading="loading"
       :columns="columns"
       :data="tableData.list"
+      no-data-text="<p class='tc'>暂无数据</p>"
       @on-selection-change="onSelectionChange"
     ></Table>
     <div class="table_pagination-box">
       <Page :total="tableData.total" show-elevator :current.sync="keys.page"></Page>
       <slot :target="selections" name="footer"></slot>
     </div>
-  </dtSection>
+  </DtSection>
 </template>
 
 <script>
@@ -47,40 +48,37 @@ export default {
   }),
   watch: {
     keys: {
-      handler (c) {
-        this.update()
-      },
-      deep: true
+      handler: 'init',
+      deep: true,
+      immediate: true
     }
   },
   mounted () {
-    this.update()
-    bus.$on('update', isUnshift => {
+    bus.$on('updateTable', isUnshift => {
       if (isUnshift && this.keys.page > 1) {
         this.keys.page = 1
       } else {
-        this.update()
+        this.init()
       }
     })
   },
   destroyed () {
-    bus.$off('update')
+    bus.$off('updateTable')
   },
   methods: {
-    update () {
+    async init () {
       this.loading = true
       this.selections = ''
-      this.$http[this.api].getList(this.keys).then(data => {
-        data.domain && data.list.map(item => { item.image = data.domain + item.image })
-        if (data.list.length === 0 && this.keys.page > 1) {
-          this.keys.page--
-          return
-        }
-        setTimeout(() => {
-          this.loading = false
-          this.tableData = data
-        }, 300)
-      })
+      const { data } = await this.$http[this.api].getList(this.keys)
+      data.total = ~~data.total
+      data.domain && data.list.map(item => { item.image = data.domain + item.image })
+      if (data.list.length === 0 && this.keys.page > 1) {
+        return this.keys.page--
+      }
+      setTimeout(() => {
+        this.loading = false
+        this.tableData = data
+      }, 300)
     },
     onSelectionChange (selections) {
       this.selections = selections.map(v => v[this.selectIdName] || v.id).join(',')

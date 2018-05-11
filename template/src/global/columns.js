@@ -1,5 +1,5 @@
 import bus from '@/bus'
-import $store from '@/store'
+import $store from '@/vuex'
 import $router from '@/router'
 import { download } from './funs'
 import { filterTimestamp } from '@/global/funs'

@@ -48,4 +48,3 @@ export default {
   user-select: none;
 }
 </style>
-

@@ -1,124 +1,69 @@
 <template>
-  <div class="login">
-    <div class="login_box">
-      <div class="login_title">
-        XXXX后台管理系统
-      </div>
-      <div class="login_detail mt-30">
-        <Form ref="form" :rules="$v.login" :model="formData" label-position="top">
-          <FormItem prop="username">
-            <Input v-model.trim="formData.username" :maxlength="$ml.username" @keyup.enter.native="submit" placeholder="请输入账号">
-              <Icon type="person" slot="prepend" class="login_icon"></Icon>
-            </Input>
-          </FormItem>
-          <FormItem prop="password">
-            <Input type="password" v-model.trim="formData.password" :maxlength="$ml.password" @keyup.enter.native="submit" placeholder="请输入密码">
-              <Icon type="locked" slot="prepend" class="login_icon"></Icon>
-            </Input>
-          </FormItem>
-          <Checkbox v-model="remember">记住密码</Checkbox>
-          <FormItem class="mt-10">
-            <Button v-if="!formData.username||!formData.password" class="login_btn" type="primary" style="opacity: .6">
-              <span>登录</span>
-            </Button>
-            <Button v-else class="login_btn" type="primary" @click="submit" style="border: none">
-              <DtLoading v-if="loging"/>
-              <span v-else>登录</span>
-            </Button>
-          </FormItem>
-        </Form>
-      </div>
+  <Form ref="form" :model="formData" :rules="formRules" key="login">
+    <FormItem prop="mobile" class="form_item">
+      <Input ref="logMobile" v-model="formData.mobile" :maxlength="$ml.mobile" placeholder="请输入手机号">
+        <i slot="prepend" class="iconfont icon-mobile"></i>
+      </Input>
+    </FormItem>
+    <FormItem prop="password" class="form_item">
+      <Input ref="logPass" type="password" v-model="formData.password" :maxlength="$ml.password" placeholder="请输入密码" @on-enter="submit">
+        <i slot="prepend" class="iconfont icon-password"></i>
+      </Input>
+    </FormItem>
+    <div class="auto">
+      <Checkbox v-model="auto">记住密码</Checkbox>
+      <router-link :to="{name: 'forget'}">忘记密码？</router-link>
     </div>
-  </div>
+    <a v-if="loading" class="btn btn_primary mt-20" style="position:relative">
+      <dt-loading></dt-loading>
+    </a>
+    <a v-else class="btn btn_primary mt-20" @click="submit">登录</a>
+  </Form>
 </template>
 
 <script>
-import { ACCESS_TOKEN, USER_INFO, LOGIN_INFO } from '../../../../php/project'
-import { aes } from '@/global/funs'
+import * as v from '@/global/validate'
+import { accessToken, loginUser } from '@/global/storage'
 export default {
   data: () => ({
-    loging: false,
+    auto: false,
+    loading: false,
     formData: {
-      username: '',
+      mobile: '',
       password: ''
-    },
-    remember: false
+    }
   }),
+  computed: {
+    formRules: () => ({
+      mobile: v.mobile,
+      password: v.password
+    })
+  },
   mounted () {
-    this.init()
+    let username = this.$route.query.id
+    username && (this.formData.mobile = username)
+    let info = loginUser.get()
+    if (info) {
+      this.auto = true
+      this.formData = info
+    }
   },
   methods: {
-    init () {
-      let info = window.localStorage.getItem(USER_INFO)
-      if (info) {
-        this.remember = true
-        this.formData = JSON.parse(aes.decrypt(info))
-      }
-    },
-    submit () {
+    submit (name) {
       this.$refs['form'].validate(valid => {
         if (!valid) return
-        this.doLogin()
-        // this.$router.replace('./home')
+        this.loading = true
+        this.$http.account.login(this.formData.mobile, this.formData.password).then(data => {
+          this.$Message.success('登陆成功！')
+          accessToken.set(data['access_token'])
+          this.$router.replace('/home')
+          this.auto ? loginUser.set(this.formData) : loginUser.cls()
+        }).catch(e => {
+          setTimeout(() => { this.loading = false }, 300)
+          this.$Message.error(e.errmsg)
+        })
       })
-    },
-    doLogin () {
-      this.loging = true
-      this.$http.account.login(this.formData).then(data => {
-        window.localStorage.setItem(ACCESS_TOKEN, data['access_token'])
-        window.localStorage.setItem(LOGIN_INFO, aes.encrypt(JSON.stringify({login_time: Date.now(), expire: data.expire})))
-        this.$router.replace('./home')
-        this.rememberOrNot()
-      }).catch(e => {
-        this.loging = false
-        this.$Message.error(e.errmsg)
-      })
-    },
-    rememberOrNot () {
-      if (this.remember) {
-        window.localStorage.setItem(USER_INFO, aes.encrypt(JSON.stringify(this.formData)))
-      } else {
-        window.localStorage.removeItem(USER_INFO)
-      }
     }
   }
 }
 </script>
-
-<style lang=less>
-.login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 600px;
-  position: relative;
-  z-index: 1;
-  &_box {
-    width: 400px;
-    background-color: #fff;
-    border-radius: 6px;
-    overflow: hidden;
-    padding: 40px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(66, 185, 131, .4);
-    transform: translate(0, -50px)
-  }
-  &_icon {
-    color: #888;
-    font-size: 18px;
-    padding-left: 2px;
-    padding-right: 1px;
-  }
-  &_title {
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  &_btn {
-    width: 100%;
-    height: 40px;
-  }
-}
-
-</style>
