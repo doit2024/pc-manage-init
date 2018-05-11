@@ -1,15 +1,4 @@
 /**
- * 表单字段长度限制
- */
-export const ml = {
-  name: 22,
-  username: 11,
-  password: 22,
-  vcode: 6,
-  mac: 12
-}
-
-/**
  * 规则细节
  */
 
@@ -62,42 +51,18 @@ const vCheckbox = (rule, value, callback) => {
  * 验证条目
  */
 
-export const aRequireText = [{
-  validator: vRequireText,
-  trigger: 'blur'
-}]
+export const aRequireText = [{ validator: vRequireText, trigger: 'blur' }]
 
-export const aRequireSelect = [{
-  validator: vRequireSelect,
-  trigger: 'change'
-}]
+export const aRequireSelect = [{ validator: vRequireSelect, trigger: 'change' }]
 
-export const aUsername = [{
-  validator: vUsername,
-  trigger: 'blur'
-}]
+export const aUsername = [{ validator: vUsername, trigger: 'blur' }]
 
-export const aPassword = [{
-  validator: vPassword,
-  trigger: 'blur'
-}]
+export const aPassword = [{ validator: vPassword, trigger: 'blur' }]
 
-export const aNumber = [{
-  validator: vNumber,
-  trigger: 'blur'
-}]
+export const aNumber = [{ validator: vNumber, trigger: 'blur' }]
 
-export const aMac = [{
-  validator: vMac,
-  trigger: 'blur'
-}]
+export const aMac = [{ validator: vMac, trigger: 'blur' }]
 
-export const aSn = [{
-  validator: vSn,
-  trigger: 'blur'
-}]
+export const aSn = [{ validator: vSn, trigger: 'blur' }]
 
-export const aCheckbox = [{
-  validator: vCheckbox,
-  trigger: 'change'
-}]
+export const aCheckbox = [{ validator: vCheckbox, trigger: 'change' }]

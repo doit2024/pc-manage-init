@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 const Tool = require('../Tool.class')
-const { ROUTES } = Tool.getConfig()
+const ymls = require('../lib/yml')
+const { ROUTES } = ymls.project
 
 const template = (first, second, page) => `const ${page.padEnd(30)} = () => import('@/pages/${first}/${second}/${page}')\n`
 

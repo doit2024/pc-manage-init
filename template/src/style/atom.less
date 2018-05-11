@@ -40,23 +40,33 @@
 	&-error { color: @color-danger }
 	&-info { color: @color-info }
 }
-.height {
-	&-100 {
-		height: 100px;
-	}
+.w {
+	&-100 { width: 100px; }
 }
+.h {
+	&-100 { height: 100px; }
+}
+
+.tc { text-align: center; justify-content: center }
+.tl { text-align: left } 
+.tr { text-align: right }
 
 .flex {
   display: flex;
   align-items: center;
 }
 
-.flexCenter {
+.flex-ct {
   display: flex;
 	align-items: center;
 	justify-content: center;
 }
-.flexJS {
+.flex-sa {
+  display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.flex-sb {
   display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -74,15 +84,6 @@
 .wrap {
   word-wrap: break-word;
   word-break: break-all;
-}
-
-.tc { text-align: center; justify-content: center }
-.tl { text-align: left } 
-.tr { text-align: right }
-
-.is_bgimg {
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 
 .ellipsis {

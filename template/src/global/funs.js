@@ -1,4 +1,4 @@
-import { AES_KEY } from '../../php/project'
+import { AES_KEY } from '../../init/project'
 import GibberishAES from '@/plugins/gibberish-aes'
 
 export const aes = {
@@ -6,14 +6,17 @@ export const aes = {
   decrypt: item => GibberishAES.aesDecrypt(item, AES_KEY)
 }
 
+/**
+ * 若复杂则使用 moment 库
+ */
 export const filterTimestamp = {
-  toDateTime: (time, toMs = 1000) => (!time || time === '0') ? '---' : _formatTimestamp(new Date(toMs * time), 'yyyy-MM-dd hh:mm:ss'),
-  toDate: (time, toMs = 1000) => (!time || time === '0') ? '---' : _formatTimestamp(new Date(toMs * time), 'yyyy/MM/dd'),
-  toDays: phpTime => phpTime / 60 / 60,
-  toTime: phpTime => {
-    let seconds = new Date(phpTime).getSeconds()
-    let minutes = new Date(phpTime).getMinutes()
-    let hours = parseInt(phpTime / 3600)
+  toDateTime: unixTime => (!unixTime || unixTime === '0') ? '---' : _formatTimestamp(new Date(unixTime * 1000), 'yyyy-MM-dd hh:mm:ss'),
+  toDate: unixTime => (!unixTime || unixTime === '0') ? '---' : _formatTimestamp(new Date(unixTime * 1000), 'yyyy/MM/dd'),
+  toDays: unixTime => unixTime / 3600,
+  toTime: msTime => {
+    let seconds = new Date(msTime).getSeconds()
+    let minutes = new Date(msTime).getMinutes()
+    let hours = parseInt(msTime / 3600)
     return _padLeftZero(hours) + ':' + _padLeftZero(minutes) + ':' + _padLeftZero(seconds)
   }
 }

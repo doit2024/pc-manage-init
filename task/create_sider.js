@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 const Tool = require('../Tool.class')
-const { SIDER, ROUTES } = Tool.getConfig()
+const ymls = require('../lib/yml')
+const { SIDER, ROUTES } = ymls.project
 const SIDER_MAP = ROUTES['home']
 
 const getTmpSubmenu = (index, arrPath, arrName) => `
@@ -22,10 +23,10 @@ const getTmpMenuItem = (path, name) => `
 `
 
 module.exports = (dir, cb) => {
-  fs.readFile(path.join(__dirname, '../lib/page/sider.tpl'), (err, res) => {
+  fs.readFile(path.join(__dirname, '../template/page/sider.tpl'), (err, res) => {
     Tool.dieif(err, __filename, __line)
     let tpl = _filterSiderPage(res.toString())
-    fs.writeFile(path.join(__dirname, '../lib/home/sider.vue'), tpl, err => Tool.dieif(err, __filename, __line))
+    fs.writeFile(path.join(__dirname, '../template/home/sider.vue'), tpl, err => Tool.dieif(err, __filename, __line))
     cb()
   })
 }

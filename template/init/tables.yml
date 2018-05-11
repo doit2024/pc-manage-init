@@ -1,5 +1,7 @@
 # 表格
-# 名称为控制器名
+# 表名为ROUTES.home键名即页面名
+# ps.最好与后台统一页面名和控制器名
+
 user:
   api: user
   title: 用户列表

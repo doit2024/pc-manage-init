@@ -6,35 +6,27 @@ ADMIN:
   username: 13751198387
   password: 123456
 
-# 路由表: 键或值不能重名
 ROUTES:
-  # login:
-  #   - login
-  #   - signup
-  #   - forget
-  login: 
-    - login
-  home:
-    - index
-    - 
-      - user
-      - user_detail
-      - user_active
-    - 
-      - device
-      - device_detail
-      - device_authorize
-    - apk
-    - firmware
-    - alert
-    - content
-    - message
-    - feedback
-    - email
-    - aboutus
-    - question
+  - index
+  - 
+    - user
+    - user_detail
+    - user_active
+  - 
+    - device
+    - device_detail
+    - device_authorize
+  - apk
+  - firmware
+  - alert
+  - content
+  - message
+  - feedback
+  - email
+  - aboutus
+  - question
 
-# 左侧菜单栏, 与 ROUTE.home 对应
+# 左侧菜单栏, 与 ROUTES 对应
 SIDER:
   - 首页
   - 

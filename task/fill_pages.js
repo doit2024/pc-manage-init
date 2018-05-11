@@ -1,27 +1,30 @@
 const fs = require('fs')
 const path = require('path')
 const Tool = require('../Tool.class')
-const { ROUTES, TABLE_PAGES } = Tool.getConfig()
+
+const ymls = require('../lib/yml')
+const { ROUTES } = ymls.project
+const { TABLE_PAGES } = ymls.tables
 
 module.exports = dir => {
   require('./create_sider')(dir, () => {
     Object.keys(ROUTES).forEach(first => {
       // 创建一级目录 (login|home|modal|...])
       Tool.createDir(path.join('pages', first), groupFirst => {
-        Tool.copyDir(path.join(__dirname, '../lib', first), groupFirst)
+        Tool.copyDir(path.join(__dirname, '../template', first), groupFirst)
         ROUTES[first].forEach((second, index) => {
           // 创建二级目录
           Tool.createDir(path.join('pages', first, `${index}_${second[0]}`), groupSecond => {
             // 创建二级目录下的文件
             second.forEach(page => {
               let tablePage = TABLE_PAGES[page]
-              fs.readFile(path.join(__dirname, `../lib/page/${tablePage ? 'table' : 'simple'}.tpl`), (err, res) => {
+              fs.readFile(path.join(__dirname, `../template/page/${tablePage ? 'table' : 'simple'}.tpl`), (err, res) => {
                 Tool.dieif(err, __filename, __line)
                 let tpl = _filterTablePage(res.toString(), tablePage, page)
                 fs.writeFile(path.join(groupSecond, `${page}.vue`), tpl, err => {
                   Tool.dieif(err, __filename, __line)
                   if (page === 'signup') {
-                    Tool.copyFile(path.join(__dirname, '../lib/page/signup.tpl'), path.join(groupSecond, `signup.vue`))
+                    Tool.copyFile(path.join(__dirname, '../template/page/signup.tpl'), path.join(groupSecond, `signup.vue`))
                   }
                 })
               })
@@ -92,25 +95,25 @@ function _handleColumns (filter) {
       case 'ctime': tpl += `${tpl ? ',' : ''}${pre}this.$cc.ctime`; break
       case 'atime': tpl += `${tpl ? ',' : ''}${pre}this.$cc.atime`; break
       case 'action':
-      let actions = title.split('|')
-      tpl += `,
+        let actions = title.split('|')
+        tpl += `,
         {
           title: '操作',
           key: 'action',
           render: (h, params) => h('div', {
             attrs: { style: 'display: flex' }
           }, [
-            ${actions.map(act => {
-              switch (act) {
-                case 'download': return `this.$cc.hDownload(h, params)`
-                case 'detail': return `this.$cc.hDetail(h, params, {'router|modal': '---'})`
-                case 'edit': return `this.$cc.hEdit(h, params, {'router|modal': '---'})`
-                case 'del': return `this.$cc.hDel(h, params, {api: '${filter.api}'})`
-              }
-            }).join(',\n            ')}
-          ])
-        }`
-      break
+              ${actions.map(act => {
+                switch (act) {
+                  case 'download': return `this.$cc.hDownload(h, params)`
+                  case 'detail': return `this.$cc.hDetail(h, params, {'router|modal': '---'})`
+                  case 'edit': return `this.$cc.hEdit(h, params, {'router|modal': '---'})`
+                  case 'del': return `this.$cc.hDel(h, params, {api: '${filter.api}'})`
+                }
+              }).join(',\n            ')}
+            ])
+          }`
+        break
       default:
         tpl += `${tpl ? ',' : ''}
         {
