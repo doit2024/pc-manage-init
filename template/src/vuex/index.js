@@ -5,15 +5,15 @@ Vue.use(Vuex)
 
 let state = {
   isSidebar: false,
-  isModal: false
+  modal: { show: false }
 }
 
 const mutations = {
   showSidebar: (state, show) => {
     state.isSidebar = show
   },
-  showModal: (state, show) => {
-    state.isModal = show
+  modal: (state, obj) => {
+    state.modal = obj
   },
   update: (state, data) => {
     const { key, value } = data
@@ -24,13 +24,13 @@ const mutations = {
 
 const actions = {
   showSidebar: ({commit}, show) => { commit('showSidebar', show) },
-  showModal: ({commit}, show) => { commit('showModal', show) },
+  modal: ({commit}, obj) => { commit('modal', obj) },
   update: ({commit}, data) => { commit('update', data) }
 }
 
 const getters = {
   isSidebar: () => state.isSidebar,
-  isModal: () => state.isModal
+  modal: () => state.modal
 }
 
 export default new Vuex.Store({

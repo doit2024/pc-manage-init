@@ -34,9 +34,10 @@ apiArrWithoutAccount.forEach((v, i) => {
     ${mock},`
 })
 
-let apiContent = `
-import ajax from './core'
-import { aes } from '@/global'\n
+let apiContent = `import core from './core'
+import { aes } from '@/global/funs'
+const { ajax } = core
+
 export default {
   account: {
     login: ({username, password}) => ajax({url: 'account/login',

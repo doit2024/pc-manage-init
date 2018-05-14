@@ -1,7 +1,7 @@
 PRE: dt
-PORT: 8022
+PORT: 8107
 HOST: http://120.24.55.58
-AES_KEY: 267a4733f3d89127bac20be290742c81
+AES_KEY: 80NAZosLwxbhlWXaBwdlxOPuAgzbJgwU
 ADMIN:
   username: 13751198387
   password: 123456

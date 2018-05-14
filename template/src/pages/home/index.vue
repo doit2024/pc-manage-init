@@ -16,13 +16,6 @@ import DtHeader from './header'
 import DtSider from './sider'
 import DtModal from '../modal'
 export default {
-  beforeCreate () {
-    this.$http.account.info().then(data => {
-      this.$store.dispatch('update', {key: 'userinfo', value: data})
-    }).catch(e => {
-      this.$router.push('/login')
-    })
-  },
   components: {
     DtHeader,
     DtSider,

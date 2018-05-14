@@ -1,4 +1,5 @@
-import { BASE_URL } from '@/config'
+import CONFIG from '@/config'
+const { BASE_URL } = CONFIG
 
 export default (url, file) => {
   let formData = new FormData()

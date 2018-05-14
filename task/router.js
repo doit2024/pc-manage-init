@@ -14,7 +14,7 @@ module.exports = () => {
 
   const routes = ROUTES.map((route, i) => {
     if (isString(route)) {
-      return `        { path: ${(`'/${route}',`).padEnd(20)} name: ${(`${route},`).padEnd(20)} component: ${route.padEnd(20)} },`
+      return `        { path: ${(`'/${route === 'index'?'':route}',`).padEnd(20)} name: ${(`${route},`).padEnd(20)} component: ${route.padEnd(20)} },`
     } else {
       return route.map(r => `        { path: ${(`'/${r}',`).padEnd(20)} name: ${(`${r},`).padEnd(20)} component: ${r.padEnd(20)} },`).join('\n')
     }

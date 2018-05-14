@@ -1,6 +1,7 @@
-import { BASE_URL } from '@/config'
+import CONFIG from '@/config'
 import { accessToken, globalParams } from '@/global/storage'
 import { Modal, Message } from 'iview'
+const { BASE_URL } = CONFIG
 
 // 错误提示
 const _showNetErr = (msg = '网络异常，请稍后再试') => {

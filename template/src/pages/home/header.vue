@@ -1,6 +1,6 @@
 <template>
   <Header id="header">
-    <div class="header_logo" @mouseenter="$store.dispatch('showSider', true)" @mouseleave="$store.dispatch('showSider', false)">
+    <div class="header_logo" @mouseenter="$store.dispatch('showSidebar', true)" @mouseleave="$store.dispatch('showSidebar', false)">
       <div class="logo">
         <img class="logo-img" src="../../assets/logo.png" alt="">
       </div>
@@ -13,7 +13,7 @@
       <span>{{ userinfo.fullname }}</span>
       <Icon type="arrow-down-b" :class="{'dropdown-tran': visible}"></Icon>
       <DropdownMenu slot="list">
-        <li class="ivu-dropdown-item" @click="$store.dispatch('modal', {show: 'account'})">账号信息</li>
+        <li class="ivu-dropdown-item" @click="$store.dispatch('modal', {show: 'account', data: userinfo})">账号信息</li>
         <li class="ivu-dropdown-item" @click="quit">退出</li>
       </DropdownMenu>
     </Dropdown>
@@ -21,22 +21,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data: () => ({
-    // userInfo: {
-    //   avatar: '',
-    //   fullname: 'summer'
-    // },
+    userinfo: {
+      avatar: '',
+      fullname: 'summer',
+      image: ''
+    },
     visible: false
   }),
   computed: {
-    ...mapGetters(['userinfo']),
     userDefault () {
       return require('../../assets/user_default.png')
     }
   },
+  mounted () {
+    this.init()
+  },
   methods: {
+    async init () {
+      const data = await this.$http.account.info()
+      this.userinfo = data
+    },
     onVisibleChange (v) {
       this.visible = v
     },
@@ -45,16 +51,11 @@ export default {
         title: '提示',
         content: '确定要退出吗？',
         onOk: () => {
-          this.$http.account.logout().then(res => {
-            this.handleQuit()
-          }).catch(e => {
-            this.handleQuit()
-          })
+          this.$http.account.logout().then(this.handleQuit).catch(this.handleQuit)
         }
       })
     },
     handleQuit () {
-      this.$store.dispatch('quit')
       this.$router.replace('/login')
     }
   }

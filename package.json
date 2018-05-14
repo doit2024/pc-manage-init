@@ -2,7 +2,7 @@
   "author": {
     "name": "nudazhuang"
   },
-  "version": "1.1.12",
+  "version": "1.1.13",
   "bin": {
     "generate-api": "./bin/generate_api.js",
     "pc-manage-init": "./bin/pc_init.js"

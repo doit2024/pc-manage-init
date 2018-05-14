@@ -2,8 +2,8 @@
   <Sider id="sider" :class="{show: isShowSider}">
     <Menu
       style="width: 200px;"
-      :open-names="[{{$openNames}}]"
-      :active-name="/^\/\w+/.exec($route.path)[0]"
+      :open-names="[]"
+      :active-name="$route.path"
       @on-select="handleSelect"
     >{{$content}}
     </Menu>
