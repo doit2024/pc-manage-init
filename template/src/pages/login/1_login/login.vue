@@ -1,24 +1,37 @@
 <template>
-  <Form ref="form" :model="formData" :rules="formRules" key="login">
+<div class="login-form">
+  <div class="header">
+    <h3 class="title">开发与运营平台</h3>
+    <p class="subtitle">副标题副标题副标题副标题副标题副标题</p>
+  </div>
+  <Form class="form" ref="form" :model="formData" :rules="formRules" key="login">
     <FormItem prop="mobile" class="form_item">
-      <Input ref="logMobile" v-model="formData.mobile" :maxlength="$ml.mobile" placeholder="请输入手机号">
-        <i slot="prepend" class="iconfont icon-mobile"></i>
+      <Input ref="logMobile" v-model="formData.username" :maxlength="$ml.mobile" placeholder="请输入手机号">
+        <Icon slot="prepend" type="person"></Icon>
       </Input>
     </FormItem>
     <FormItem prop="password" class="form_item">
       <Input ref="logPass" type="password" v-model="formData.password" :maxlength="$ml.password" placeholder="请输入密码" @on-enter="submit">
-        <i slot="prepend" class="iconfont icon-password"></i>
+        <Icon slot="prepend" type="locked"></Icon>
       </Input>
     </FormItem>
-    <div class="auto">
+    <div class="flex-sb">
       <Checkbox v-model="auto">记住密码</Checkbox>
       <router-link :to="{name: 'forget'}">忘记密码？</router-link>
     </div>
-    <a v-if="loading" class="btn btn_primary mt-20" style="position:relative">
-      <dt-loading></dt-loading>
-    </a>
-    <a v-else class="btn btn_primary mt-20" @click="submit">登录</a>
+    <div class="mt-20">
+      <Button type="primary" long @click="submit">提交</Button>
+    </div>
+    <div class="flex-sb mt-10">
+      <div class="other">其他登录方式
+        <Icon type="ionic"></Icon>
+        <Icon type="outlet"></Icon>
+        <Icon type="happy"></Icon>
+      </div>
+      <router-link style="float:right" :to="{name: 'signup'}">注册账户</router-link>
+    </div>
   </Form>
+</div>
 </template>
 
 <script>
@@ -29,19 +42,17 @@ export default {
     auto: false,
     loading: false,
     formData: {
-      mobile: '',
+      username: '',
       password: ''
     }
   }),
   computed: {
     formRules: () => ({
-      mobile: v.mobile,
+      username: v.mobile,
       password: v.password
     })
   },
   mounted () {
-    let username = this.$route.query.id
-    username && (this.formData.mobile = username)
     let info = loginUser.get()
     if (info) {
       this.auto = true
@@ -49,11 +60,11 @@ export default {
     }
   },
   methods: {
-    submit (name) {
+    submit () {
       this.$refs['form'].validate(valid => {
         if (!valid) return
         this.loading = true
-        this.$http.account.login(this.formData.mobile, this.formData.password).then(data => {
+        this.$http.account.login(this.formData).then(data => {
           this.$Message.success('登陆成功！')
           accessToken.set(data['access_token'])
           this.$router.replace('/home')
@@ -67,3 +78,36 @@ export default {
   }
 }
 </script>
+
+<style lang=less>
+.login-form {
+  padding: 112px 0 24px;
+  flex: 1 1 0%;
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .title {
+    height: 44px;
+    line-height: 44px;
+    font-size: 28px;
+    position: relative;
+    top: 2px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: rgba(0,0,0,.45);
+    margin-top: 12px;
+  }
+  .form {
+    width: 280px;
+    margin: 0 auto;
+  }
+  .other {
+    font-size: 14px;
+    .ivu-icon {
+      margin: 3px;
+    }
+  }
+}
+</style>

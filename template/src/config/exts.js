@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 import iView from 'iview'
 import '@/style/itheme.less'
-import Component from 'vue-auto-register'
+import { component } from 'vue-auto-register'
 
 import apiGroup from '@/ajax'
 import * as validate from '@/global/validate'
@@ -20,7 +20,7 @@ Object.keys(filterTimestamp).forEach(key => {
 })
 
 Vue.use(iView)
-Vue.use(Component)
+Vue.use(component)
 
 Object.assign(Vue.prototype, {
   $http: apiGroup,
