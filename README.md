@@ -47,13 +47,13 @@ $ npm i -D pc-manage-init
 ## start
  ```
 
- 1-生成php目录               : $ npm run init
+ 1-生成init目录               : $ npm run init
 
- 2-处理php目录 （见配置说明）
+ 2-配置init目录
 
  3-生成项目                  : $ npm run init
 
- 4-根据apidoc更新src/ajax    : $ npm run api
+ 4-启动项目                  : $ npm start
 
  ```
 

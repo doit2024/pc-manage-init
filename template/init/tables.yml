@@ -2,7 +2,7 @@
 # 表名为ROUTES.home键名即页面名
 # ps.最好与后台统一页面名和控制器名
 
-user:
+user_detail:
   api: user
   title: 用户列表
   slots:
@@ -11,11 +11,10 @@ user:
   columns:
     - _index:序号
     - nickname:昵称
-    - ctime:创建时间
-    - rtime:注册时间
+    - ctime:注册时间
     - action:detail|edit|del
 
-device:
+device_detail:
   api: device
   title: 设备列表
   slots:
@@ -27,8 +26,5 @@ device:
     - _index:序号
     - serial:序列号
     - name:名称
-    - field1:字段1
-    - field2:字段2
     - ctime:创建时间
-    - rtime:注册时间
     - action:download|edit|del

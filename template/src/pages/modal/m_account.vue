@@ -32,24 +32,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: ['modal'],
-  data: () => ({
-    isUpdatePassword: false,
-    formData: {
-      username: '',
-      fullname: '',
-      image: ''
-    },
-    password: {
-      old_pwd: '',
-      new_pwd: '',
-      repwd: ''
+  data () {
+    return {
+      isUpdatePassword: false,
+      formData: this.modal.data,
+      password: {
+        old_pwd: '',
+        new_pwd: '',
+        repwd: ''
+      }
     }
-  }),
+  },
   computed: {
-    ...mapGetters(['userinfo']),
     rules () {
       return {
         fullname: this.$v.aRequireText
@@ -63,9 +59,6 @@ export default {
         repwd: p
       }
     }
-  },
-  mounted () {
-    this.formData = {...this.userinfo}
   },
   methods: {
     submit () {

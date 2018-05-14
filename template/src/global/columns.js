@@ -6,7 +6,7 @@ import { filterTimestamp } from '@/global/funs'
 import { Modal, Message } from 'iview'
 import $http from '@/ajax'
 
-const hDownload = (h, params, {text}) => h('Button', {
+const hDownload = (h, params, {text} = {text: '下载'}) => h('Button', {
   props: {
     type: 'success',
     size: 'small'
@@ -18,7 +18,7 @@ const hDownload = (h, params, {text}) => h('Button', {
       download(params.row.link || params.row.path || params.row.src)
     }
   }
-}, text || '下载')
+}, text)
 
 const hDetail = (h, params, {modal, router, text}) => h('Button', {
   props: {

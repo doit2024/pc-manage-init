@@ -6,6 +6,7 @@ const { ROUTES } = PROJECT
 
 module.exports = () => {
   ROUTES.forEach((child, i) => {
+    if (i === 0) return
     isString(child) && (child = [child])
     const childDir = `src/pages/home/${i + 1}_${child[0]}`
     shell.mkdir('-p', childDir)

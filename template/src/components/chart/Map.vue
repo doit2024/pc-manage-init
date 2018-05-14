@@ -10,7 +10,6 @@ Highmaps(Highcharts)
 
 export default {
   props: {
-    type: Number,
     mapData: Array
   },
   data: () => ({

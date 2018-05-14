@@ -69,7 +69,7 @@ export default {
   justify-content: space-between;
   background-color: #fff;
   opacity: .9;
-  box-shadow: 0 1px 3px #eee;
+  border-bottom: 1px solid #eee;
   &.ivu-layout-header {
     padding-left: 0;
   }

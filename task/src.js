@@ -3,9 +3,10 @@ const shell = require('shelljs')
 const co = require('co')
 const chalk = require('chalk')
 const prompt = require('co-prompt')
-const genPages = require('../task/pages')
+const genPages = require('./pages')
 const genConfig = require('../task/config')
-const genRouter = require('../task/router')
+const genRouter = require('./router')
+const genSider = require('./sider')
 
 module.exports = () => {
   co(function *() {
@@ -18,6 +19,8 @@ module.exports = () => {
       genPages()
       genConfig()
       genRouter()
+      genSider()
+      shell.exec('npm run api')
       shell.rm('-')
     } else {
       process.exit()

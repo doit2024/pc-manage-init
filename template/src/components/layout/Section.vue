@@ -38,6 +38,7 @@ export default {
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 0 0 10px 3px #ddd;
+  margin-bottom: 30px;
   &-header {
     display: flex;
     justify-content: space-between;

@@ -69,7 +69,7 @@ export default {
     async init () {
       this.loading = true
       this.selections = ''
-      const { data } = await this.$http[this.api].getList(this.keys)
+      const data = await this.$http[this.api].lists(this.keys)
       data.total = ~~data.total
       data.domain && data.list.map(item => { item.image = data.domain + item.image })
       if (data.list.length === 0 && this.keys.page > 1) {

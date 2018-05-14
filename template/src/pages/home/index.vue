@@ -3,9 +3,11 @@
     <DtHeader/>
     <div class="main">
       <DtSider/>
-      <transition name="fade" mode="out-in">
-        <router-view class="child"/>
-      </transition>
+      <div class="child">
+        <transition name="fade" mode="out-in">
+          <router-view/>
+        </transition>
+      </div>
     </div>
     <DtModal/>
   </div>
@@ -36,6 +38,7 @@ export default {
     right: 0;
     top: @header-height;
     bottom: 0;
+    background-color: #f5f8fc;
   }
   .child {
     width: 100%;

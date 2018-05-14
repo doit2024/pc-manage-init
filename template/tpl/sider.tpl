@@ -1,5 +1,5 @@
 <template>
-  <Sider id="sider" :class="{show: isShowSider}">
+  <Sider id="sider" class="scroll-hide" :class="{show: isSidebar}">
     <Menu
       style="width: 200px;"
       :open-names="[]"
@@ -14,7 +14,7 @@
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['isShowSider'])
+    ...mapGetters(['isSidebar'])
   },
   methods: {
     handleSelect (name) {
