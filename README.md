@@ -31,9 +31,9 @@ $ cnpm i -D less less-loader
 $ npm i -D pc-manage-init
 ```
 
-## scripts
+## cli
 
-- vi package.json
+```$ vi package.json``` 
 
 ```json
 {
@@ -45,18 +45,24 @@ $ npm i -D pc-manage-init
 ```
 
 ## start
-```
-$ npm run init  # 生成init目录
+```bash
+# 生成init目录
+$ npm run init
 
 # 配置init目录
+$ cp index.php init/apidoc.js
+$ vi init/project.yml
+$ vi init/tables.yml
 
-$ npm run init  # 生成项目
+# 生成项目
+$ npm run init
 
-$ npm start     # 启动项目
+# 启动项目
+$ npm start
 
 # 非必须的命令, npm run init 已自动包含
-$ npm run api   # 根据文档生成且仅改变 @/ajax/api.js @/ajax/mock.js
-
+# 根据文档生成且仅改变 @/ajax/api.js @/ajax/mock.js
+$ npm run api
 ```
 
 ## 参考
