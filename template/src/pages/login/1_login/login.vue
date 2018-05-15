@@ -20,7 +20,7 @@
       <router-link :to="{name: 'forget'}">忘记密码？</router-link>
     </div>
     <div class="mt-20">
-      <Button type="primary" long @click="submit">提交</Button>
+      <Button type="primary" long :loading="loading" @click="submit">提交</Button>
     </div>
     <div class="flex-sb mt-10">
       <div class="other">其他登录方式

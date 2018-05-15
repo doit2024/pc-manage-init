@@ -1,21 +1,30 @@
 <template>
   <DtSection :title="trend.title">
-    <DtTrend :color="trend.color" :name="trend.name" :data="trend.data"/>
+    <DtSelect slot="action" name="days" v-model="keys.type"/>
+    <DtCheckNoData :isNoData="!trend.data.length">
+      <DtTrend :color="trend.color" :name="trend.name" :data="trend.data"/>
+    </DtCheckNoData>
   </DtSection>
 </template>
 
 <script>
 const data = {
-  user: {
+  'statistics.user_trends': {
     title: '用户趋势',
     color: '#f80',
     name: '用户数量',
     data: []
   },
-  device: {
+  'statistics.device_trends': {
     title: '设备趋势',
     color: '#f00',
     name: '设备数量',
+    data: []
+  },
+  'nodata': {
+    title: '无数据情况',
+    color: '#f00',
+    name: '----',
     data: []
   }
 }
@@ -28,24 +37,25 @@ export default {
   },
   data () {
     return {
-      trend: data[this.api]
+      trend: data[this.api],
+      keys: {
+        type: '1'
+      }
     }
   },
-  mounted () {
-    this.init()
+  watch: {
+    keys: {
+      handler: 'init',
+      deep: true,
+      immediate: true
+    }
   },
   methods: {
     async init () {
-      // const data = await this.$http[this.api].trend()
-      // this.trend.data = data
-
-      if (this.api === 'user') {
-      this.trend.data = ['20180905', '20180906', '20180907', '20180908', '20180909', '20180910']
-      .map(v => [Date.parse(v.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')) + 8*60*60*1000, 25])
-      } else {
-        this.trend.data = ['20190905', '20180906', '20180907', '20180908', '20180909', '20180910']
-        .map(v => [Date.parse(v.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')) + 8*60*60*1000, 125])
-      }
+      if (this.api === 'nodata') return // 演示效果用，可删除此行
+      const [ controller, action ] = this.api.split('.')
+      const data = await this.$http[controller][action]()
+      this.trend.data = data.map(item => [item.date * 1000, item.value])
     }
   }
 }

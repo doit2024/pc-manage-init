@@ -23,9 +23,10 @@ export default {
   methods: {
     handleDel () {
       this.$Modal.confirm({
-        content: '确定？',
+        title: '操作确认',
+        content: '确定批量删除本页选中项？',
         onOk: async e => {
-          const res = await this.$http[this.api].del()
+          const res = await this.$http[this.api].del({ids: this.ids})
           res && alert('done!')
         }
       })

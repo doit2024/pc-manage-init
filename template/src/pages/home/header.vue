@@ -6,14 +6,14 @@
       </div>
       <Icon class="icon" type="navicon-round"></Icon>
     </div>
-    <h1 class="header_title ellipsis">XXXXX后台管理系统</h1>
+    <h1 class="header_title ellipsis">后台管理系统</h1>
     <Dropdown class="header_right" trigger="click" placement="bottom-end" @on-visible-change="onVisibleChange">
       <Avatar v-if="userinfo.image" :src="userinfo.image" />
       <Avatar v-else :src="userDefault" />
-      <span>{{ userinfo.fullname }}</span>
+      <span class="ml-6 mr-6">{{ userinfo.fullname }}</span>
       <Icon type="arrow-down-b" :class="{'dropdown-tran': visible}"></Icon>
-      <DropdownMenu slot="list">
-        <li class="ivu-dropdown-item" @click="$store.dispatch('modal', {show: 'account', data: userinfo})">账号信息</li>
+      <DropdownMenu class="menu" slot="list">
+        <li class="ivu-dropdown-item" @click="$store.dispatch('modal', {show: 'm_account', data: userinfo})">账号信息</li>
         <li class="ivu-dropdown-item" @click="quit">退出</li>
       </DropdownMenu>
     </Dropdown>
@@ -72,6 +72,7 @@ export default {
   border-bottom: 1px solid #eee;
   &.ivu-layout-header {
     padding-left: 0;
+    padding-right: 20px;
   }
   z-index: 1;
   .header {
@@ -82,9 +83,11 @@ export default {
         width: @sidebar-width;
         justify-content: center;
         align-items: center;
+        box-shadow: 0 0 10px 3px #eee;
         &-img {
           max-width: @sidebar-width;
           max-height: @header-height;
+          border-bottom: 1px solid #eee;
         }
       }
       .icon {
@@ -104,6 +107,9 @@ export default {
         &.dropdown-tran {
           transform: rotate(180deg)
         }
+      }
+      .menu {
+        width: 120px;
       }
     }
   }

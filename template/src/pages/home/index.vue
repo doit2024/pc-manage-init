@@ -3,7 +3,7 @@
     <DtHeader/>
     <div class="main">
       <DtSider/>
-      <div class="child">
+      <div class="child scroll">
         <transition name="fade" mode="out-in">
           <router-view/>
         </transition>

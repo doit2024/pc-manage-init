@@ -71,6 +71,7 @@ const hDel = (h, params, {api}) => h('Button', {
         title: '操作确认',
         content: `确定删除该条记录（行号： ${row._index + 1}）？`,
         onOk: () => {
+          if (!$http[api].del) return alert(`没找到api: ${api}.del`)
           $http[api].del(row).then(res => {
             Message.success('删除成功！')
             bus.$emit('update')

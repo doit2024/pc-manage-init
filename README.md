@@ -1,7 +1,6 @@
 # pc-manage-init
 
 - 一个后台管理框架生成脚本
-- 整改中...
 
 ---
 
@@ -14,6 +13,7 @@
 - vuex
 - less
 - highcharts
+- mockjs
 
 ## before all
 
@@ -21,7 +21,7 @@
 $ vue-init webpack demo
 $ cd demo
 $ cnpm i
-$ cnpm i -S iview babel-polyfill vuex highcharts vue-auto-register jsonp
+$ cnpm i -S iview babel-polyfill vuex highcharts vue-auto-register jsonp mockjs
 $ cnpm i -D less less-loader
 ```
 
@@ -45,28 +45,25 @@ $ npm i -D pc-manage-init
 ```
 
 ## start
- ```
+```
+$ npm run init  # 生成init目录
 
- 1-生成init目录               : $ npm run init
+# 配置init目录
 
- 2-配置init目录
+$ npm run init  # 生成项目
 
- 3-生成项目                  : $ npm run init
+$ npm start     # 启动项目
 
- 4-启动项目                  : $ npm start
+# 非必须的命令, npm run init 已自动包含
+$ npm run api   # 根据文档生成且仅改变 @/ajax/api.js @/ajax/mock.js
 
- ```
+```
 
+## 参考
 
-## 可能出现的坑
-
- 1. eslint: Parsing error: x-invalid-end-tag
- .eslintrc.js 的 rules 加上 (脚本已自动加上):
- * "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]
-
-## other
-
-- 权限参考
+- 涉及到权限
+- addRouter Api
+- 动态render侧边栏：
 
 ```
 Vue.component('SiderItem', {
@@ -96,4 +93,12 @@ Vue.component('SiderItem', {
     )
   }
 })
+```
+
+
+- 登录退出时由于滚动条而抖动
+- scroll-hide 样式类在 @/style/scrollbar.less
+
+```
+<body class="scroll-hide">
 ```

@@ -10,6 +10,10 @@ Highmaps(Highcharts)
 
 export default {
   props: {
+    name: {
+      type: String,
+      default: '数量'
+    },
     mapData: Array
   },
   data: () => ({
@@ -58,7 +62,7 @@ export default {
             data,
             mapData,
             joinBy: ['name', 'city'],
-            name: '产品数',
+            name: this.name,
             states: {
               hover: {
                 color: Highcharts.getOptions().colors[2]

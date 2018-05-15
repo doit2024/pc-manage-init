@@ -49,7 +49,7 @@ export default {
     .left {
       display: flex;
       align-items: center;
-      font-size: 15px;
+      font-size: 18px;
       font-weight: bold;
     }
     .right {
@@ -57,7 +57,7 @@ export default {
     }
   }
   &-content {
-    padding: 20px;
+    padding: 30px;
     background-color: #fff;
   }
   &-icon {

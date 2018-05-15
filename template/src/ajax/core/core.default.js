@@ -14,7 +14,7 @@ const _formateResData = (res, resolve, reject, options) => {
   const { url, whereCatch } = options
   switch (res['errcode']) {
     case 0: resolve(res.data); break
-    case 10002: // 凭证失效
+    case 400006: // 凭证失效
       if (url.match('logout')) return reject(100) // 登出时
       Modal.info({ title: '提示', content: '凭证失效， 点击确定重新登录', onOk: () => { window.location = '/' } }) // 其他
       break

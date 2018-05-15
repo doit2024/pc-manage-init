@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     openImport () {
-      this.$store.dispatch('modal', {name: this.api})
+      this.$store.dispatch('modal', {show: `m_${this.api}_new`})
     }
   }
 }

@@ -15,19 +15,6 @@
   </div>
 </template>
 
-<script>
-import { loginUser } from '@/global/storage'
-import CONFIG from '@/config'
-const { DEV_ADMIN } = CONFIG
-export default {
-  created () {
-    if (process.env.NODE_ENV === 'development') {
-      loginUser.set(DEV_ADMIN)
-    }
-  }
-}
-</script>
-
 <style lang=less>
 
 .login {

@@ -1,8 +1,8 @@
 <template>
   <Button
     class="dt-btn"
-    type="info"
-    @click="ept"
+    type="primary"
+    @click="openNew"
   >
     <slot/>
   </Button>
@@ -17,9 +17,8 @@ export default {
     }
   },
   methods: {
-    async ept () {
-      const { link } = await this.$http[this.api].export()
-      window.location.href = link
+    openNew () {
+      this.$store.dispatch('modal', {show: `m_${this.api}_new`})
     }
   }
 }

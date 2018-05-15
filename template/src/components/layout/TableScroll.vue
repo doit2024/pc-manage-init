@@ -2,9 +2,9 @@
   <div class="table-scroll">
     <table class="header">
       <tr style="width: 100%;display: flex;">
-        <th style="width:27%">地域</th>
-        <th style="width:42%">{{ ['产品数', '用户数'][this.type] }}</th>
-        <th style="width:25%">占比</th>
+        <th style="width:25%">地域</th>
+        <th style="width:50%">{{ ['产品数', '用户数'][this.type] }}</th>
+        <th style="width:22%">占比</th>
       </tr>
     </table>
     <Table
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     nodataimg: () => `no data`,
-    columns() {
+    columns () {
       return [
         { title: '地域', key: 'city' },
         { title: '数量', key: 'value' },
@@ -46,6 +46,13 @@ export default {
   }
   .ivu-table-cell {
     text-align: center
+  }
+  .ivu-table:before,
+  .ivu-table:after {
+    display: none;
+  }
+  .ivu-table-wrapper {
+    border-left: none;
   }
 }
 </style>

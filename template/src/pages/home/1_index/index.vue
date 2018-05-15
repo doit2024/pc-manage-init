@@ -9,18 +9,20 @@
       ]"/>
     </DtSection>
 
-    <DtChartTrend api="user"/>
+    <DtChartTrend api="statistics.user_trends"/>
 
-    <DtChartTrend api="device"/>
+    <DtChartTrend api="statistics.device_trends"/>
+
+    <DtChartTrend api="nodata"/>
 
     <DtSection title="数据统计">
-      <ButtonGroup shape="circle">
+      <ButtonGroup slot="action" shape="circle">
         <Button :type="type===0?'primary':'ghost'" @click="type=0">产品分布</Button>
         <Button :type="type===1?'primary':'ghost'" @click="type=1">用户分布</Button>
       </ButtonGroup>
       <Row>
         <Col span="16">
-          <DtMap :mapData="mapData"/>
+          <DtMap :mapData="mapData" :name="['产品数', '用户数'][type]"/>
         </Col>
         <Col span="8">
           <DtTableScroll :tableData="mapData" :type="type"/>
@@ -33,7 +35,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       deviceTrend: [],
       userTrend: [],
@@ -42,16 +44,19 @@ export default {
     }
   },
   watch: {
-    type(c) {
+    type (c) {
       this.init()
     }
   },
-  mounted() {
+  mounted () {
     this.init()
   },
   methods: {
-    init() {
-      this.mapData = [{city: '广东', value: 90, percent: '100%'}]
+    init () {
+      this.mapData = [
+        [{city: '广东', value: 90, percent: '100%'}],
+        [{city: '台湾', value: 100, percent: '100%'}]
+      ][this.type]
     }
   }
 }
