@@ -1,5 +1,5 @@
 <template>
-  <div ref="map"></div>
+  <div></div>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
       data = data.map(v => ({city: v.city, value: ~~v.value}))
       $('https://data.jianshukeji.com/jsonp?filename=geochina/china.json', (err, mapData) => {
         if (err) return
-        this.map = new Highcharts.Map(this.$refs.map, {
+        this.map = new Highcharts.Map(this.$el, {
           title: null,
           credits: {
             enabled: false
