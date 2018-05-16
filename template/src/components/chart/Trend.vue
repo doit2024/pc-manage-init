@@ -1,5 +1,5 @@
 <template>
-  <div ref="trendBox" style="height:400px"></div>
+  <div style="height:400px"></div>
 </template>
 
 <script>
@@ -35,7 +35,7 @@ export default {
   methods: {
     init () {
       const { color, name, data } = this
-      this.chart = new Highcharts.Chart(this.$refs.trendBox, setOptionsLine({ color, name, data }))
+      this.chart = new Highcharts.Chart(this.$el, setOptionsLine({ color, name, data }))
     },
     update () {
       const { name, data, color } = this
