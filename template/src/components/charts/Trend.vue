@@ -1,10 +1,10 @@
 <template>
-  <div style="height:400px"></div>
+  <div></div>
 </template>
 
 <script>
 import Highcharts from 'highcharts'
-import { setOptionsLine } from './help'
+import __options from './trend'
 export default {
   props: {
     color: {
@@ -35,7 +35,7 @@ export default {
   methods: {
     init () {
       const { color, name, data } = this
-      this.chart = new Highcharts.Chart(this.$el, setOptionsLine({ color, name, data }))
+      this.chart = new Highcharts.Chart(this.$el, __options({ color, name, data }))
     },
     update () {
       const { name, data, color } = this
@@ -45,5 +45,4 @@ export default {
     }
   }
 }
-
 </script>

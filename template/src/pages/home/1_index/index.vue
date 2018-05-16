@@ -17,15 +17,15 @@
 
     <DtSection title="数据统计">
       <ButtonGroup slot="action" shape="circle">
-        <Button :type="type===0?'primary':'ghost'" @click="type=0">产品分布</Button>
-        <Button :type="type===1?'primary':'ghost'" @click="type=1">用户分布</Button>
+        <Button :type="mapType===0?'primary':'ghost'" @click="mapType=0">产品分布</Button>
+        <Button :type="mapType===1?'primary':'ghost'" @click="mapType=1">用户分布</Button>
       </ButtonGroup>
       <Row>
         <Col span="16">
-          <DtMap :mapData="mapData" :name="['产品数', '用户数'][type]"/>
+          <DtMap :data="mapData" :name="['产品数', '用户数'][mapType]"/>
         </Col>
         <Col span="8">
-          <DtTableScroll :tableData="mapData" :type="type"/>
+          <DtTableScroll :tableData="mapData" :type="mapType"/>
         </Col>
       </Row>
     </DtSection>
@@ -39,14 +39,12 @@ export default {
     return {
       deviceTrend: [],
       userTrend: [],
-      type: 0,
+      mapType: 0,
       mapData: []
     }
   },
   watch: {
-    type (c) {
-      this.init()
-    }
+    mapType: 'init'
   },
   mounted () {
     this.init()
@@ -56,7 +54,7 @@ export default {
       this.mapData = [
         [{city: '广东', value: 90, percent: '100%'}],
         [{city: '台湾', value: 100, percent: '100%'}]
-      ][this.type]
+      ][this.mapType]
     }
   }
 }

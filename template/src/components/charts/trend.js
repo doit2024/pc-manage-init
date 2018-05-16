@@ -1,19 +1,14 @@
 import Highcharts from 'highcharts'
+import common from './common'
 
-export const credits = {
-  href: 'http://www.dtston.com',
-  text: 'dtston.com'
-}
-
-export const setOptionsLine = oKeys => {
+export default oKeys => {
   const { color, name, data } = oKeys
+
   return {
+    ...common,
     chart: {
-      type: 'area',
       zoomType: 'x'
-      // alignTicks: false
     },
-    credits,
     title: {
       text: null
     },
@@ -24,12 +19,7 @@ export const setOptionsLine = oKeys => {
       type: 'datetime',
       crosshair: true,
       minorTickInterval: 'auto',
-      // endOnTick: true,
       dateTimeLabelFormats: {
-        // millisecond: '%H:%M:%S.%L',
-        // second: '%H:%M:%S',
-        // minute: '%H:%M',
-        // hour: '%H:%M',
         day: '%m-%d',
         week: '%m-%d',
         month: '%Y-%m',
@@ -47,10 +37,6 @@ export const setOptionsLine = oKeys => {
     },
     tooltip: {
       dateTimeLabelFormats: {
-        // millisecond: '%H:%M:%S.%L',
-        // second: '%H:%M:%S',
-        // minute: '%H:%M',
-        // hour: '%H:%M',
         day: '%Y-%m-%d',
         week: '%m-%d',
         month: '%Y-%m',
@@ -87,54 +73,10 @@ export const setOptionsLine = oKeys => {
       }
     },
     series: [{
+      type: 'area',
       name,
       data,
       color
-    }]
-  }
-}
-
-export const setOptionsCircle = oKeys => {
-  const { data, colors } = oKeys
-  return {
-    legend: {
-      align: 'right',
-      verticalAlign: 'top'
-    },
-    colors,
-    credits,
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      spacing: [30, 10, 30, 10]
-    },
-    title: {
-      text: null
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-      pie: {
-        size: 200,
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b style="font-size: 20px; color: #555">{point.percentage:.0f}</b> %',
-          style: {
-            color: 'black'
-          }
-        }
-      }
-    },
-    series: [{
-      type: 'pie',
-      innerSize: '80%',
-      name: '市场份额',
-      data,
-      showInLegend: true
     }]
   }
 }
