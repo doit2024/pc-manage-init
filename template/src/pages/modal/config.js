@@ -1,12 +1,12 @@
 import mixin from './btn_mixin'
 
 const result = {}
-const requireComponent = require.context('.', true, /m_\w+\.vue$/)
-requireComponent.keys().forEach(key => {
-  const componentName = /(\w+).vue$/.exec(key)[1]
-  const comConfig = requireComponent(key)
-  result[componentName] = comConfig.default || comConfig
-  result[componentName].mixins = [mixin]
+const requireFile = require.context('.', true, /m_\w+\.vue$/)
+requireFile.keys().forEach(key => {
+  const modalName = /(\w+).vue$/.exec(key)[1]
+  const comConfig = requireFile(key)
+  result[modalName] = comConfig.default || comConfig
+  result[modalName].mixins = [mixin]
 })
 
 export const modals = result
